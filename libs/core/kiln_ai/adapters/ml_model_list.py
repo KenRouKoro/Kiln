@@ -102,7 +102,6 @@ class ModelName(str, Enum):
     claude_3_5_sonnet = "claude_3_5_sonnet"
     claude_3_7_sonnet = "claude_3_7_sonnet"
     claude_3_7_sonnet_thinking = "claude_3_7_sonnet_thinking"
-    claude_4_sonnet_thinking = "claude_4_sonnet_thinking"
     claude_sonnet_4 = "claude_sonnet_4"
     claude_opus_4 = "claude_opus_4"
     gemini_1_5_flash = "gemini_1_5_flash"
@@ -1634,7 +1633,7 @@ built_in_models: List[KilnModel] = [
         providers=[
             KilnModelProvider(
                 name=ModelProviderName.openrouter,
-                model_id="deepseek/deepseek-chat-v3-0324",
+                model_id="deepseek/deepseek-chat",
                 structured_output_mode=StructuredOutputMode.function_calling,
             ),
             KilnModelProvider(
@@ -1659,7 +1658,7 @@ built_in_models: List[KilnModel] = [
         providers=[
             KilnModelProvider(
                 name=ModelProviderName.openrouter,
-                model_id="deepseek/deepseek-r1-0528",
+                model_id="deepseek/deepseek-r1",
                 parser=ModelParserID.r1_thinking,
                 structured_output_mode=StructuredOutputMode.json_instructions,
                 reasoning_capable=True,
