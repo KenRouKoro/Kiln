@@ -13,7 +13,7 @@
   import { tick } from "svelte"
   import { load_task } from "$lib/stores"
   import { goto } from "$app/navigation"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   let combined_model_name: string | undefined = undefined
   let model_name: string | undefined = undefined
@@ -57,7 +57,9 @@
           )
         }
         eval_steps.push(
-          $_('evaluation.create_eval_config.eval_templates.kiln_requirements_suffix'),
+          $_(
+            "evaluation.create_eval_config.eval_templates.kiln_requirements_suffix",
+          ),
         )
       }
 
@@ -91,12 +93,11 @@
       evaluator = data
 
       // Load static template eval steps if we have one
-      if (
-        evaluator.template &&
-        evaluator.template !== "kiln_requirements"
-      ) {
+      if (evaluator.template && evaluator.template !== "kiln_requirements") {
         // Use one of the static templates from i18n
-        const templateSteps = $_(`evaluation.create_eval_config.eval_templates.${evaluator.template}`)
+        const templateSteps = $_(
+          `evaluation.create_eval_config.eval_templates.${evaluator.template}`,
+        )
         if (Array.isArray(templateSteps)) {
           eval_steps = templateSteps
         }
@@ -118,14 +119,18 @@
   }[] = [
     {
       id: "g_eval",
-      name: $_('evaluation.create_eval_config.algorithms.g_eval.name'),
-      description: $_('evaluation.create_eval_config.algorithms.g_eval.description'),
-      warning: $_('evaluation.create_eval_config.algorithms.g_eval.warning'),
+      name: $_("evaluation.create_eval_config.algorithms.g_eval.name"),
+      description: $_(
+        "evaluation.create_eval_config.algorithms.g_eval.description",
+      ),
+      warning: $_("evaluation.create_eval_config.algorithms.g_eval.warning"),
     },
     {
       id: "llm_as_judge",
-      name: $_('evaluation.create_eval_config.algorithms.llm_as_judge.name'),
-      description: $_('evaluation.create_eval_config.algorithms.llm_as_judge.description'),
+      name: $_("evaluation.create_eval_config.algorithms.llm_as_judge.name"),
+      description: $_(
+        "evaluation.create_eval_config.algorithms.llm_as_judge.description",
+      ),
       warning: undefined,
     },
   ]
@@ -201,9 +206,9 @@
 
 <div class="max-w-[1400px]">
   <AppPage
-    title={$_('evaluation.create_eval_config.title')}
-    subtitle={$_('evaluation.create_eval_config.subtitle')}
-    sub_subtitle={$_('evaluation.create_eval_config.sub_subtitle')}
+    title={$_("evaluation.create_eval_config.title")}
+    subtitle={$_("evaluation.create_eval_config.subtitle")}
+    sub_subtitle={$_("evaluation.create_eval_config.sub_subtitle")}
     sub_subtitle_link="https://docs.getkiln.ai/docs/evaluations#finding-the-ideal-eval-method"
   >
     {#if loading}
@@ -214,21 +219,25 @@
       <div
         class="w-full min-h-[50vh] flex flex-col justify-center items-center gap-2"
       >
-        <div class="font-medium">{$_('evaluation.create_eval_config.error_loading_task')}</div>
+        <div class="font-medium">
+          {$_("evaluation.create_eval_config.error_loading_task")}
+        </div>
         <div class="text-error text-sm">
-          {loading_error?.getMessage() || $_('errors.unknown_error')}
+          {loading_error?.getMessage() || $_("errors.unknown_error")}
         </div>
       </div>
     {:else}
       <FormContainer
         submit_visible={!!(selected_algo && combined_model_name)}
-        submit_label={$_('evaluation.create_eval_config.create_eval_method')}
+        submit_label={$_("evaluation.create_eval_config.create_eval_method")}
         on:submit={create_evaluator}
         bind:error={create_evaluator_error}
         bind:submitting={create_evaluator_loading}
         warn_before_unload={!complete && !!selected_algo}
       >
-        <div class="text-xl font-bold">{$_('evaluation.create_eval_config.step1_title')}</div>
+        <div class="text-xl font-bold">
+          {$_("evaluation.create_eval_config.step1_title")}
+        </div>
 
         <div class="form-control flex flex-col gap-2">
           {#each evaluator_algorithms as evaluator}
@@ -268,10 +277,10 @@
         {#if selected_algo}
           <div class="text-sm font-medium text-left pt-6 flex flex-col gap-1">
             <div class="text-xl font-bold" id="requirements_part">
-              {$_('evaluation.create_eval_config.step2_title')}
+              {$_("evaluation.create_eval_config.step2_title")}
             </div>
             <div class="text-xs text-gray-500">
-              {$_('evaluation.create_eval_config.step2_desc')}
+              {$_("evaluation.create_eval_config.step2_desc")}
             </div>
           </div>
 
@@ -288,11 +297,11 @@
         {#if selected_algo && combined_model_name}
           <div class="text-sm font-medium text-left pt-6 flex flex-col gap-1">
             <div class="text-xl font-bold" id="requirements_part">
-              {$_('evaluation.create_eval_config.step3_title')}
+              {$_("evaluation.create_eval_config.step3_title")}
             </div>
             <div class="text-xs text-gray-500">
               <div>
-                {$_('evaluation.create_eval_config.step3_desc')}
+                {$_("evaluation.create_eval_config.step3_desc")}
               </div>
             </div>
           </div>
@@ -306,26 +315,28 @@
 
           <div class="text-sm font-medium text-left pt-6 flex flex-col gap-1">
             <div class="text-xl font-bold" id="requirements_part">
-              {$_('evaluation.create_eval_config.step4_title')}
+              {$_("evaluation.create_eval_config.step4_title")}
             </div>
             <div class="text-xs text-gray-500">
-              {$_('evaluation.create_eval_config.step4_desc')}
+              {$_("evaluation.create_eval_config.step4_desc")}
             </div>
             {#if evaluator?.template}
               <div class="text-xs text-gray-500">
-                {$_('evaluation.create_eval_config.template_prepopulated', { values: { template: evaluator.template } })}
+                {$_("evaluation.create_eval_config.template_prepopulated", {
+                  values: { template: evaluator.template },
+                })}
               </div>
             {/if}
           </div>
 
           <FormList
             bind:content={eval_steps}
-            content_label={$_('evaluation.evaluation_steps')}
+            content_label={$_("evaluation.evaluation_steps")}
             empty_content={""}
             let:item_index
           >
             <FormElement
-              label={$_('evaluation.instructions')}
+              label={$_("evaluation.instructions")}
               inputType="textarea"
               id="eval_step_{item_index}"
               hide_label={true}

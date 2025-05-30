@@ -10,8 +10,8 @@
 
 <div class="max-w-[900px]">
   <AppPage
-    title={$_('task.new_task')}
-    subtitle={$_('task.new_task_description')}
+    title={$_("task.new_task")}
+    subtitle={$_("task.new_task_description")}
     sub_subtitle="{$_('task.target_project')}: {project_target_name}"
   >
     <EditTask bind:project_target_name explicit_project_id={project_id} />

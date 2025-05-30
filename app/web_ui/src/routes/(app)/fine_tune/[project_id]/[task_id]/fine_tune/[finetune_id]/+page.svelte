@@ -10,7 +10,7 @@
   import InfoTooltip from "$lib/ui/info_tooltip.svelte"
   import Output from "../../../../../run/output.svelte"
   import EditDialog from "$lib/ui/edit_dialog.svelte"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   $: project_id = $page.params.project_id
   $: task_id = $page.params.task_id
@@ -72,13 +72,19 @@
     let finetune_data = finetune.finetune
     const provider_name = provider_name_from_id(finetune_data.provider)
     properties = [
-      { name: $_('finetune.details.kiln_id'), value: finetune_data.id },
-      { name: $_('finetune.details.name'), value: finetune_data.name },
-      { name: $_('finetune.details.description'), value: finetune_data.description },
-      { name: $_('finetune.details.provider'), value: provider_name },
-      { name: $_('finetune.details.base_model'), value: finetune_data.base_model_id },
+      { name: $_("finetune.details.kiln_id"), value: finetune_data.id },
+      { name: $_("finetune.details.name"), value: finetune_data.name },
       {
-        name: provider_name + " " + $_('finetune.details.model_id'),
+        name: $_("finetune.details.description"),
+        value: finetune_data.description,
+      },
+      { name: $_("finetune.details.provider"), value: provider_name },
+      {
+        name: $_("finetune.details.base_model"),
+        value: finetune_data.base_model_id,
+      },
+      {
+        name: provider_name + " " + $_("finetune.details.model_id"),
         value: format_model_id(
           finetune_data.fine_tune_model_id,
           finetune_data.provider,
@@ -86,19 +92,25 @@
         link: model_link(),
       },
       {
-        name: provider_name + " " + $_('finetune.details.job_id'),
+        name: provider_name + " " + $_("finetune.details.job_id"),
         value: format_provider_id(
           finetune_data.provider_id,
           finetune_data.provider,
         ),
         link: job_link(),
       },
-      { name: $_('finetune.details.created_at'), value: formatDate(finetune_data.created_at) },
-      { name: $_('finetune.details.created_by'), value: finetune_data.created_by },
       {
-        name: $_('finetune.details.type'),
+        name: $_("finetune.details.created_at"),
+        value: formatDate(finetune_data.created_at),
+      },
+      {
+        name: $_("finetune.details.created_by"),
+        value: finetune_data.created_by,
+      },
+      {
+        name: $_("finetune.details.type"),
         value: data_strategy_name(finetune_data.data_strategy),
-        info: $_('finetune.details.type_info'),
+        info: $_("finetune.details.type_info"),
       },
     ]
     properties = properties.filter((property) => !!property.value)
@@ -143,7 +155,7 @@
     provider: string,
   ): string {
     if (!provider_id) {
-      return $_('finetune.details.unknown')
+      return $_("finetune.details.unknown")
     }
     if (provider === "fireworks_ai") {
       return provider_id.split("/").pop() || provider_id
@@ -156,7 +168,7 @@
     provider: string,
   ): string {
     if (!model_id) {
-      return $_('finetune.details.not_completed')
+      return $_("finetune.details.not_completed")
     }
     if (provider === "fireworks_ai") {
       return model_id.split("/").pop() || model_id
@@ -169,17 +181,19 @@
 
 <div class="max-w-[1400px]">
   <AppPage
-    title={$_('finetune.details.title')}
-    subtitle={finetune_loading ? undefined : `${$_('finetune.details.name')}: ${finetune?.finetune.name}`}
+    title={$_("finetune.details.title")}
+    subtitle={finetune_loading
+      ? undefined
+      : `${$_("finetune.details.name")}: ${finetune?.finetune.name}`}
     action_buttons={[
       {
-        label: $_('common.edit'),
+        label: $_("common.edit"),
         handler: () => {
           edit_dialog?.show()
         },
       },
       {
-        label: $_('finetune.details.reload_status'),
+        label: $_("finetune.details.reload_status"),
         handler: () => {
           get_fine_tune()
         },
@@ -195,16 +209,18 @@
         class="w-full min-h-[50vh] flex flex-col justify-center items-center gap-2"
       >
         <div class="font-medium">
-          {$_('finetune.details.error_loading')}
+          {$_("finetune.details.error_loading")}
         </div>
         <div class="text-error text-sm">
-          {finetune_error?.getMessage() || $_('finetune.details.unknown_error')}
+          {finetune_error?.getMessage() || $_("finetune.details.unknown_error")}
         </div>
       </div>
     {:else}
       <div class="flex flex-col xl:flex-row gap-8 xl:gap-16 mb-10">
         <div class="grow flex flex-col gap-4">
-          <div class="text-xl font-bold">{$_('finetune.details.details_section')}</div>
+          <div class="text-xl font-bold">
+            {$_("finetune.details.details_section")}
+          </div>
           <div
             class="grid grid-cols-[auto,1fr] gap-y-4 gap-x-4 text-sm 2xl:text-base"
           >
@@ -226,11 +242,13 @@
           </div>
 
           {#if finetune.finetune.system_message || finetune.finetune.thinking_instructions}
-            <div class="text-xl font-bold mt-8">{$_('finetune.details.training_prompt_section')}</div>
+            <div class="text-xl font-bold mt-8">
+              {$_("finetune.details.training_prompt_section")}
+            </div>
             {#if finetune.finetune.system_message}
               <div>
                 <div class="text-sm font-bold text-gray-500 mb-2">
-                  {$_('finetune.details.system_prompt_label')}
+                  {$_("finetune.details.system_prompt_label")}
                 </div>
                 <Output raw_output={finetune.finetune.system_message} />
               </div>
@@ -238,7 +256,7 @@
             {#if finetune.finetune.thinking_instructions}
               <div>
                 <div class="text-sm font-bold text-gray-500 mb-2">
-                  {$_('finetune.details.thinking_instructions_label')}
+                  {$_("finetune.details.thinking_instructions_label")}
                 </div>
                 <Output raw_output={finetune.finetune.thinking_instructions} />
               </div>
@@ -247,11 +265,13 @@
         </div>
 
         <div class="grow flex flex-col gap-4 min-w-[400px]">
-          <div class="text-xl font-bold">{$_('finetune.details.status_section')}</div>
+          <div class="text-xl font-bold">
+            {$_("finetune.details.status_section")}
+          </div>
           <div
             class="grid grid-cols-[auto,1fr] gap-y-4 gap-x-4 text-sm 2xl:text-base"
           >
-            <div class="flex items-center">{$_('finetune.details.status')}</div>
+            <div class="flex items-center">{$_("finetune.details.status")}</div>
             <div class="flex items-center text-gray-500">
               {#if running}
                 <span class="loading loading-spinner mr-2 h-[14px] w-[14px]"
@@ -264,23 +284,28 @@
                   class="link ml-2 text-xs font-medium"
                   on:click={get_fine_tune}
                 >
-                  {$_('finetune.details.reload_status')}
+                  {$_("finetune.details.reload_status")}
                 </button>
               {/if}
             </div>
 
             {#if finetune.status.message}
-              <div class="flex items-center">{$_('finetune.details.status_message')}</div>
+              <div class="flex items-center">
+                {$_("finetune.details.status_message")}
+              </div>
               <div class="flex items-center text-gray-500">
                 {finetune.status.message}
               </div>
             {/if}
 
             {#if job_link()}
-              <div class="flex items-center">{$_('finetune.details.job_dashboard')}</div>
+              <div class="flex items-center">
+                {$_("finetune.details.job_dashboard")}
+              </div>
               <div class="flex items-center text-gray-500">
                 <a href={job_link()} target="_blank" class="btn btn-sm">
-                  {provider_name_from_id(finetune.finetune.provider)} {$_('finetune.details.dashboard')}
+                  {provider_name_from_id(finetune.finetune.provider)}
+                  {$_("finetune.details.dashboard")}
                 </a>
               </div>
             {/if}
@@ -293,19 +318,19 @@
 
 <EditDialog
   bind:this={edit_dialog}
-  name={$_('finetune.details.title')}
+  name={$_("finetune.details.title")}
   patch_url={`/api/projects/${project_id}/tasks/${task_id}/finetunes/${finetune_id}`}
   fields={[
     {
-      label: $_('finetune.finetune_name_label'),
-      description: $_('finetune.finetune_name_description'),
+      label: $_("finetune.finetune_name_label"),
+      description: $_("finetune.finetune_name_description"),
       api_name: "name",
       value: finetune?.finetune.name || "",
       input_type: "input",
     },
     {
-      label: $_('finetune.finetune_description_label'),
-      description: $_('finetune.finetune_description_description'),
+      label: $_("finetune.finetune_description_label"),
+      description: $_("finetune.finetune_description_description"),
       api_name: "description",
       value: finetune?.finetune.description || "",
       input_type: "textarea",

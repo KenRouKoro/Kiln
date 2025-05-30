@@ -2,7 +2,7 @@
   import { client } from "$lib/api_client"
   import { page } from "$app/stores"
   import Dialog from "$lib/ui/dialog.svelte"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   export let onImportCompleted: () => void
   export let tag_splits: Record<string, number> | null = null
@@ -74,11 +74,15 @@
 
 <Dialog
   bind:this={dialog}
-  title={$_('dataset.upload_dialog.title')}
+  title={$_("dataset.upload_dialog.title")}
   action_buttons={[
-    { label: $_('common.cancel'), isCancel: true, action: () => handleCancel() },
     {
-      label: $_('common.upload'),
+      label: $_("common.cancel"),
+      isCancel: true,
+      action: () => handleCancel(),
+    },
+    {
+      label: $_("common.upload"),
       asyncAction: () => handleUpload(),
       disabled: !selected_file,
       isPrimary: true,
@@ -89,18 +93,32 @@
     <div class="space-y-2">
       <div>
         <p>
-          {$_('dataset.upload_dialog.description')} (<a
+          {$_("dataset.upload_dialog.description")} (<a
             href="https://docs.getkiln.ai/docs/organizing-datasets"
             target="_blank"
-            class="link">{$_('dataset.upload_dialog.see_docs')}</a
-          >). {$_('dataset.upload_dialog.supported_columns')}
+            class="link">{$_("dataset.upload_dialog.see_docs")}</a
+          >). {$_("dataset.upload_dialog.supported_columns")}
         </p>
         <ul class="mb-6 ml-4 mt-3 list-disc">
-          <li><code>input</code> - {$_('dataset.upload_dialog.input_required')}</li>
-          <li><code>output</code> - {$_('dataset.upload_dialog.output_required')}</li>
-          <li><code>reasoning</code> - {$_('dataset.upload_dialog.reasoning_optional')}</li>
-          <li><code>chain_of_thought</code> - {$_('dataset.upload_dialog.chain_of_thought_optional')}</li>
-          <li><code>tags</code> - {$_('dataset.upload_dialog.tags_optional')}</li>
+          <li>
+            <code>input</code> - {$_("dataset.upload_dialog.input_required")}
+          </li>
+          <li>
+            <code>output</code> - {$_("dataset.upload_dialog.output_required")}
+          </li>
+          <li>
+            <code>reasoning</code> - {$_(
+              "dataset.upload_dialog.reasoning_optional",
+            )}
+          </li>
+          <li>
+            <code>chain_of_thought</code> - {$_(
+              "dataset.upload_dialog.chain_of_thought_optional",
+            )}
+          </li>
+          <li>
+            <code>tags</code> - {$_("dataset.upload_dialog.tags_optional")}
+          </li>
         </ul>
       </div>
     </div>

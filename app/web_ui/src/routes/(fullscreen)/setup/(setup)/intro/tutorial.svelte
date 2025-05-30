@@ -1,52 +1,49 @@
 <script lang="ts">
   import TutorialSection from "./tutorial_section.svelte"
   import { fly } from "svelte/transition"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
   let section = 0
 
   let sections = [
     {
-      title: $_('tutorial.data_driven_improvements'),
+      title: $_("tutorial.data_driven_improvements"),
       promos: [
-        $_('tutorial.data_driven_promo_1'),
-        $_('tutorial.data_driven_promo_2'),
-        $_('tutorial.data_driven_promo_3'),
+        $_("tutorial.data_driven_promo_1"),
+        $_("tutorial.data_driven_promo_2"),
+        $_("tutorial.data_driven_promo_3"),
       ],
       image_path: "/images/data_driven.png",
     },
     {
-      title: $_('tutorial.collaborate_team'),
+      title: $_("tutorial.collaborate_team"),
       promos: [
-        $_('tutorial.collaborate_promo_1'),
-        $_('tutorial.collaborate_promo_2'),
-        $_('tutorial.collaborate_promo_3'),
+        $_("tutorial.collaborate_promo_1"),
+        $_("tutorial.collaborate_promo_2"),
+        $_("tutorial.collaborate_promo_3"),
       ],
       image_path: "/images/collaborate.png",
     },
     {
-      title: $_('tutorial.find_best_way'),
+      title: $_("tutorial.find_best_way"),
       promos: [
-        $_('tutorial.find_best_promo_1'),
-        $_('tutorial.find_best_promo_2'),
-        $_('tutorial.find_best_promo_3'),
+        $_("tutorial.find_best_promo_1"),
+        $_("tutorial.find_best_promo_2"),
+        $_("tutorial.find_best_promo_3"),
       ],
       image_path: "/images/logo_grid.png",
     },
     {
-      title: $_('tutorial.finetune_synthetic'),
+      title: $_("tutorial.finetune_synthetic"),
       promos: [
-        $_('tutorial.finetune_promo_1'),
-        $_('tutorial.finetune_promo_2'),
-        $_('tutorial.finetune_promo_3'),
+        $_("tutorial.finetune_promo_1"),
+        $_("tutorial.finetune_promo_2"),
+        $_("tutorial.finetune_promo_3"),
       ],
       image_path: "/images/training.png",
     },
     {
-      title: $_('tutorial.library_api'),
-      promos: [
-        $_('tutorial.library_promo_1'),
-        $_('tutorial.library_promo_2'),
-      ],
+      title: $_("tutorial.library_api"),
+      promos: [$_("tutorial.library_promo_1"), $_("tutorial.library_promo_2")],
       image_path: "/images/developers.png",
     },
   ]

@@ -9,7 +9,7 @@
   import IncrementUi from "./increment_ui.svelte"
   import DataGenIntro from "./data_gen_intro.svelte"
   import GenerateSamplesModal from "./generate_samples_modal.svelte"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   export let data: SampleDataNode
   export let path: string[]
@@ -119,12 +119,12 @@
       topic_generating = true
       topic_generation_error = null
       if (!model) {
-        throw new KilnError($_('errors.no_model_selected'), null)
+        throw new KilnError($_("errors.no_model_selected"), null)
       }
       const model_provider = model.split("/")[0]
       const model_name = model.split("/").slice(1).join("/")
       if (!model_name || !model_provider) {
-        throw new KilnError($_('errors.invalid_model_selected'), null)
+        throw new KilnError($_("errors.invalid_model_selected"), null)
       }
       const existing_topics = data.sub_topics.map((t) => t.topic)
       const { data: generate_response, error: generate_error } =
@@ -157,14 +157,14 @@
         !response.subtopics ||
         !Array.isArray(response.subtopics)
       ) {
-        throw new KilnError($_('errors.no_options_returned'), null)
+        throw new KilnError($_("errors.no_options_returned"), null)
       }
       // Add new topics
       add_subtopics(response.subtopics)
     } catch (e) {
       if (e instanceof Error && e.message.includes("Load failed")) {
         topic_generation_error = new KilnError(
-          $_('errors.could_not_generate_topics'),
+          $_("errors.could_not_generate_topics"),
           null,
         )
       } else {
@@ -244,13 +244,13 @@
     {:else}
       <div class="flex flex-row justify-center mb-6 gap-8">
         <button class="btn" on:click={() => open_generate_subtopics_modal()}>
-          {$_('data_generation.add_top_level_topics')}
+          {$_("data_generation.add_top_level_topics")}
         </button>
         <button class="btn" on:click={() => open_generate_samples_modal()}>
-          {$_('data_generation.add_top_level_data')}
+          {$_("data_generation.add_top_level_data")}
         </button>
         <button class="btn" on:click={() => open_generate_samples_modal(true)}>
-          {$_('data_generation.add_data_to_all')}
+          {$_("data_generation.add_data_to_all")}
         </button>
       </div>
     {/if}
@@ -269,16 +269,17 @@
     <div
       class="hover-action flex flex-row gap-4 text-gray-500 font-light text-sm items-center"
     >
-      <button class="link" on:click={delete_topic}>{$_('common.delete')}</button>
+      <button class="link" on:click={delete_topic}>{$_("common.delete")}</button
+      >
       <button class="link" on:click={() => open_generate_subtopics_modal()}>
-        {$_('data_generation.add_subtopics')}
+        {$_("data_generation.add_subtopics")}
       </button>
       <button class="link" on:click={() => open_generate_samples_modal()}>
-        {$_('data_generation.add_data')}
+        {$_("data_generation.add_data")}
       </button>
       {#if data.sub_topics.length > 0}
         <button class="link" on:click={() => open_generate_samples_modal(true)}>
-          {$_('data_generation.add_data_to_all_subtopics')}
+          {$_("data_generation.add_data_to_all_subtopics")}
         </button>
       {/if}
     </div>
@@ -308,13 +309,13 @@
       >
         <button class="link flex" on:click={() => toggleExpand(index)}>
           {#if expandedSamples[index]}
-            - {$_('data_generation.collapse')}
+            - {$_("data_generation.collapse")}
           {:else}
-            + {$_('data_generation.expand')}
+            + {$_("data_generation.expand")}
           {/if}
         </button>
         <button class="link flex" on:click={() => delete_sample(sample)}>
-          {$_('common.delete')}
+          {$_("common.delete")}
         </button>
       </div>
     </div>
@@ -346,11 +347,13 @@
           >✕</button
         >
       </form>
-      <h3 class="text-lg font-bold">{$_('data_generation.add_subtopics')}</h3>
+      <h3 class="text-lg font-bold">{$_("data_generation.add_subtopics")}</h3>
       <p class="text-sm font-light mb-8">
-        {$_('data_generation.add_list_subtopics')}
+        {$_("data_generation.add_list_subtopics")}
         {#if path.length > 0}
-          {$_('data_generation.to_path', { values: { path: path.join(" → ") } })}
+          {$_("data_generation.to_path", {
+            values: { path: path.join(" → ") },
+          })}
         {/if}
       </p>
       {#if topic_generating}
@@ -364,9 +367,13 @@
               {topic_generation_error.message}
             </div>
           {/if}
-          <div class="flex-grow font-medium">{$_('data_generation.generate_topics')}</div>
+          <div class="flex-grow font-medium">
+            {$_("data_generation.generate_topics")}
+          </div>
           <div class="flex flex-row items-center gap-4 mt-4 mb-2">
-            <div class="flex-grow font-medium text-sm">{$_('data_generation.topic_count')}</div>
+            <div class="flex-grow font-medium text-sm">
+              {$_("data_generation.topic_count")}
+            </div>
             <IncrementUi bind:value={num_subtopics_to_generate} />
           </div>
           <AvailableModelsDropdown
@@ -378,12 +385,18 @@
             class="btn btn-sm mt-2 {custom_topics_string ? '' : 'btn-primary'}"
             on:click={generate_topics}
           >
-            {$_('data_generation.generate_n_topics', { values: { count: num_subtopics_to_generate } })}
+            {$_("data_generation.generate_n_topics", {
+              values: { count: num_subtopics_to_generate },
+            })}
           </button>
-          <div class="divider">{$_('common.or')}</div>
+          <div class="divider">{$_("common.or")}</div>
           <div class="flex flex-col">
-            <div class="flex-grow font-medium">{$_('data_generation.custom_topics')}</div>
-            <div class="text-xs text-gray-500">{$_('data_generation.comma_separated_list')}</div>
+            <div class="flex-grow font-medium">
+              {$_("data_generation.custom_topics")}
+            </div>
+            <div class="text-xs text-gray-500">
+              {$_("data_generation.comma_separated_list")}
+            </div>
           </div>
           <input
             type="text"
@@ -392,13 +405,14 @@
           />
           <button
             class="btn btn-sm {custom_topics_string ? 'btn-primary' : ''}"
-            on:click={add_custom_topics}>{$_('data_generation.add_custom_topics')}</button
+            on:click={add_custom_topics}
+            >{$_("data_generation.add_custom_topics")}</button
           >
         </div>
       {/if}
     </div>
     <form method="dialog" class="modal-backdrop">
-      <button>{$_('common.close')}</button>
+      <button>{$_("common.close")}</button>
     </form>
   </dialog>
 {/if}

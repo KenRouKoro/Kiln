@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
   import AppPage from "../../../../app_page.svelte"
   import type { Eval } from "$lib/types"
   import { client } from "$lib/api_client"
@@ -117,17 +117,17 @@
     const properties: UiProperty[] = []
 
     properties.push({
-      name: $_('evaluation.main_page.name'),
+      name: $_("evaluation.main_page.name"),
       value: evaluator.name,
     })
     if (evaluator.description) {
       properties.push({
-        name: $_('evaluation.main_page.description'),
+        name: $_("evaluation.main_page.description"),
         value: evaluator.description,
       })
     }
     properties.push({
-      name: $_('evaluation.main_page.id'),
+      name: $_("evaluation.main_page.id"),
       value: evaluator.id || "unknown",
     })
 
@@ -136,7 +136,7 @@
       eval_set_size = " (" + eval_progress.dataset_size + " items)"
     }
     properties.push({
-      name: $_('evaluation.main_page.eval_dataset'),
+      name: $_("evaluation.main_page.eval_dataset"),
       value: evaluator.eval_set_filter_id + eval_set_size,
       link: link_from_filter_id(evaluator.eval_set_filter_id),
     })
@@ -145,48 +145,48 @@
       golden_dataset_size = " (" + eval_progress.golden_dataset_size + " items)"
     }
     properties.push({
-      name: $_('evaluation.main_page.golden_dataset'),
+      name: $_("evaluation.main_page.golden_dataset"),
       value: evaluator.eval_configs_filter_id + golden_dataset_size,
-      tooltip: $_('evaluation.main_page.golden_dataset_tooltip'),
+      tooltip: $_("evaluation.main_page.golden_dataset_tooltip"),
       link: link_from_filter_id(evaluator.eval_configs_filter_id),
     })
 
     if (eval_progress?.current_eval_method) {
       properties.push({
-        name: $_('evaluation.main_page.eval_algorithm'),
+        name: $_("evaluation.main_page.eval_algorithm"),
         value: eval_config_to_ui_name(
           eval_progress.current_eval_method.config_type,
         ),
-        tooltip: $_('evaluation.main_page.eval_algorithm_tooltip'),
+        tooltip: $_("evaluation.main_page.eval_algorithm_tooltip"),
       })
       properties.push({
-        name: $_('evaluation.main_page.eval_model'),
+        name: $_("evaluation.main_page.eval_model"),
         value: model_name(
           eval_progress.current_eval_method.model_name,
           modelInfo,
         ),
-        tooltip: $_('evaluation.main_page.eval_model_tooltip'),
+        tooltip: $_("evaluation.main_page.eval_model_tooltip"),
       })
     }
 
     if (eval_progress?.current_run_method) {
       properties.push({
-        name: $_('evaluation.main_page.run_model'),
+        name: $_("evaluation.main_page.run_model"),
         value: model_name(
           eval_progress.current_run_method.run_config_properties.model_name,
           modelInfo,
         ),
-        tooltip: $_('evaluation.main_page.run_model_tooltip'),
+        tooltip: $_("evaluation.main_page.run_model_tooltip"),
       })
       properties.push({
-        name: $_('evaluation.main_page.run_prompt'),
+        name: $_("evaluation.main_page.run_prompt"),
         value:
           eval_progress.current_run_method.prompt?.name ||
           prompt_name_from_id(
             eval_progress.current_run_method.run_config_properties.prompt_id,
             taskPrompts,
           ),
-        tooltip: $_('evaluation.main_page.run_prompt_tooltip'),
+        tooltip: $_("evaluation.main_page.run_prompt_tooltip"),
         link: prompt_link(
           project_id,
           task_id,
@@ -210,18 +210,18 @@
   let goals: string[] = []
   let golden_dataset_explanation = ""
   const step_titles: string[] = [
-    $_('evaluation.main_page.step_titles.define_goals'),
-    $_('evaluation.main_page.step_titles.create_eval_data'),
-    $_('evaluation.main_page.step_titles.human_ratings'),
-    $_('evaluation.main_page.step_titles.find_best_evaluator'),
-    $_('evaluation.main_page.step_titles.find_best_way'),
+    $_("evaluation.main_page.step_titles.define_goals"),
+    $_("evaluation.main_page.step_titles.create_eval_data"),
+    $_("evaluation.main_page.step_titles.human_ratings"),
+    $_("evaluation.main_page.step_titles.find_best_evaluator"),
+    $_("evaluation.main_page.step_titles.find_best_way"),
   ]
   const step_tooltips: Record<number, string> = {
-    1: $_('evaluation.main_page.step_tooltips.define_goals'),
-    2: $_('evaluation.main_page.step_tooltips.create_eval_data'),
-    3: $_('evaluation.main_page.step_tooltips.human_ratings'),
-    4: $_('evaluation.main_page.step_tooltips.find_best_evaluator'),
-    5: $_('evaluation.main_page.step_tooltips.find_best_way'),
+    1: $_("evaluation.main_page.step_tooltips.define_goals"),
+    2: $_("evaluation.main_page.step_tooltips.create_eval_data"),
+    3: $_("evaluation.main_page.step_tooltips.human_ratings"),
+    4: $_("evaluation.main_page.step_tooltips.find_best_evaluator"),
+    5: $_("evaluation.main_page.step_tooltips.find_best_way"),
   }
   function update_eval_progress(
     progress: EvalProgress | null,
@@ -271,8 +271,9 @@
       return
     }
     if (progress.golden_dataset_size == 0) {
-      golden_dataset_explanation =
-        $_('evaluation.main_page.golden_dataset_status.empty')
+      golden_dataset_explanation = $_(
+        "evaluation.main_page.golden_dataset_status.empty",
+      )
       return
     }
     let golden_dataset_rating_issues: string[] = []
@@ -281,9 +282,9 @@
       const plural = count == 1 ? "" : "s"
       const verb = count == 1 ? "is" : "are"
       golden_dataset_rating_issues.push(
-        $_('evaluation.main_page.golden_dataset_status.unrated_items', { 
-          values: { count, plural, verb } 
-        })
+        $_("evaluation.main_page.golden_dataset_status.unrated_items", {
+          values: { count, plural, verb },
+        }),
       )
     }
     if (progress.golden_dataset_partially_rated_count > 0) {
@@ -291,17 +292,20 @@
       const plural = count == 1 ? "" : "s"
       const verb = count == 1 ? "is" : "are"
       golden_dataset_rating_issues.push(
-        $_('evaluation.main_page.golden_dataset_status.partially_rated_items', { 
-          values: { count, plural, verb } 
-        })
+        $_("evaluation.main_page.golden_dataset_status.partially_rated_items", {
+          values: { count, plural, verb },
+        }),
       )
     }
     if (golden_dataset_rating_issues.length > 0) {
       // Some golden dataset items are not fully rated.
-      const issues = golden_dataset_rating_issues.join($_('common.and'))
-      golden_dataset_explanation = $_('evaluation.main_page.golden_dataset_status.unrated', { 
-        values: { issues } 
-      })
+      const issues = golden_dataset_rating_issues.join($_("common.and"))
+      golden_dataset_explanation = $_(
+        "evaluation.main_page.golden_dataset_status.unrated",
+        {
+          values: { issues },
+        },
+      )
     } else {
       golden_dataset_explanation = ""
     }
@@ -333,13 +337,13 @@
 
   function add_eval_data() {
     if (!evaluator) {
-      alert($_('evaluation.main_page.errors.unable_to_add_data'))
+      alert($_("evaluation.main_page.errors.unable_to_add_data"))
       return
     }
     const eval_tag = tag_from_filter_id(evaluator?.eval_set_filter_id)
     const golden_tag = tag_from_filter_id(evaluator?.eval_configs_filter_id)
     if (!eval_tag || !golden_tag) {
-      alert($_('evaluation.main_page.errors.no_tag_found'))
+      alert($_("evaluation.main_page.errors.no_tag_found"))
       return
     }
     const url = `/dataset/${project_id}/${task_id}/add_data?reason=eval&splits=${encodeURIComponent(
@@ -347,16 +351,19 @@
     )}:0.8,${encodeURIComponent(golden_tag)}:0.2&eval_link=${encodeURIComponent(
       window.location.pathname,
     )}`
-    show_progress_ui($_('evaluation.main_page.creating_eval_progress.when_done_adding'), 2)
+    show_progress_ui(
+      $_("evaluation.main_page.creating_eval_progress.when_done_adding"),
+      2,
+    )
     goto(url)
   }
 
   function show_progress_ui(body: string, step: number) {
     progress_ui_state.set({
-      title: $_('evaluation.main_page.creating_eval_progress.title'),
+      title: $_("evaluation.main_page.creating_eval_progress.title"),
       body,
       link: $page.url.pathname,
-      cta: $_('evaluation.main_page.creating_eval_progress.return_to_eval'),
+      cta: $_("evaluation.main_page.creating_eval_progress.return_to_eval"),
       progress: null,
       step_count: 5,
       current_step: step,
@@ -372,32 +379,45 @@
       return
     }
 
-    show_progress_ui($_('evaluation.main_page.creating_eval_progress.when_done_rating'), 3)
+    show_progress_ui(
+      $_("evaluation.main_page.creating_eval_progress.when_done_rating"),
+      3,
+    )
     goto(url)
   }
 
   function compare_eval_methods() {
     let url = `/evals/${project_id}/${task_id}/${eval_id}/eval_configs`
-    show_progress_ui($_('evaluation.main_page.creating_eval_progress.when_done_comparing_eval'), 4)
+    show_progress_ui(
+      $_(
+        "evaluation.main_page.creating_eval_progress.when_done_comparing_eval",
+      ),
+      4,
+    )
     goto(url)
   }
 
   function compare_run_methods() {
     let url = `/evals/${project_id}/${task_id}/${eval_id}/compare_run_methods`
-    show_progress_ui($_('evaluation.main_page.creating_eval_progress.when_done_comparing_run'), 5)
+    show_progress_ui(
+      $_("evaluation.main_page.creating_eval_progress.when_done_comparing_run"),
+      5,
+    )
     goto(url)
   }
 </script>
 
 <div class="max-w-[1400px]">
   <AppPage
-    title={$_('evaluation.main_page.title', { values: { name: evaluator?.name || '' } })}
-    subtitle={$_('evaluation.main_page.subtitle')}
-    sub_subtitle={$_('evaluation.main_page.sub_subtitle')}
+    title={$_("evaluation.main_page.title", {
+      values: { name: evaluator?.name || "" },
+    })}
+    subtitle={$_("evaluation.main_page.subtitle")}
+    sub_subtitle={$_("evaluation.main_page.sub_subtitle")}
     sub_subtitle_link="https://docs.getkiln.ai/docs/evaluations"
     action_buttons={[
       {
-        label: $_('common.edit'),
+        label: $_("common.edit"),
         handler: () => {
           edit_dialog?.show()
         },
@@ -412,9 +432,11 @@
       <div
         class="w-full min-h-[50vh] flex flex-col justify-center items-center gap-2"
       >
-        <div class="font-medium">{$_('evaluation.main_page.error_loading')}</div>
+        <div class="font-medium">
+          {$_("evaluation.main_page.error_loading")}
+        </div>
         <div class="text-error text-sm">
-          {error.getMessage() || $_('evaluation.main_page.unknown_error')}
+          {error.getMessage() || $_("evaluation.main_page.unknown_error")}
         </div>
       </div>
     {:else if evaluator}
@@ -445,21 +467,58 @@
                   </div>
                   <div class="text-sm text-gray-500">
                     {#if step == 1 && goals.length > 0}
-                      {$_('evaluation.main_page.goals_description', { values: { count: goals.length, goals: goals.join(", ") } })}
+                      {$_("evaluation.main_page.goals_description", {
+                        values: {
+                          count: goals.length,
+                          goals: goals.join(", "),
+                        },
+                      })}
                     {:else if step == 2}
                       <div>
                         <div class="mb-1">
                           {#if eval_progress && !required_more_eval_data && !required_more_golden_data}
-                            {$_('evaluation.main_page.data_status.sufficient', { values: { evalSize: eval_progress?.dataset_size, goldenSize: eval_progress?.golden_dataset_size } })}
+                            {$_("evaluation.main_page.data_status.sufficient", {
+                              values: {
+                                evalSize: eval_progress?.dataset_size,
+                                goldenSize: eval_progress?.golden_dataset_size,
+                              },
+                            })}
                           {:else if eval_progress && eval_progress.dataset_size == 0 && eval_progress.golden_dataset_size == 0}
-                            {$_('evaluation.main_page.data_status.empty')}
+                            {$_("evaluation.main_page.data_status.empty")}
                           {:else if eval_progress && (required_more_eval_data || required_more_golden_data)}
                             {#if required_more_eval_data && required_more_golden_data}
-                              {$_('evaluation.main_page.data_status.insufficient', { values: { evalSize: eval_progress?.dataset_size, goldenSize: eval_progress?.golden_dataset_size, minSize: MIN_DATASET_SIZE } })}
+                              {$_(
+                                "evaluation.main_page.data_status.insufficient",
+                                {
+                                  values: {
+                                    evalSize: eval_progress?.dataset_size,
+                                    goldenSize:
+                                      eval_progress?.golden_dataset_size,
+                                    minSize: MIN_DATASET_SIZE,
+                                  },
+                                },
+                              )}
                             {:else if required_more_eval_data}
-                              {$_('evaluation.main_page.data_status.insufficient_eval', { values: { evalSize: eval_progress?.dataset_size, minSize: MIN_DATASET_SIZE } })}
+                              {$_(
+                                "evaluation.main_page.data_status.insufficient_eval",
+                                {
+                                  values: {
+                                    evalSize: eval_progress?.dataset_size,
+                                    minSize: MIN_DATASET_SIZE,
+                                  },
+                                },
+                              )}
                             {:else if required_more_golden_data}
-                              {$_('evaluation.main_page.data_status.insufficient_golden', { values: { goldenSize: eval_progress?.golden_dataset_size, minSize: MIN_DATASET_SIZE } })}
+                              {$_(
+                                "evaluation.main_page.data_status.insufficient_golden",
+                                {
+                                  values: {
+                                    goldenSize:
+                                      eval_progress?.golden_dataset_size,
+                                    minSize: MIN_DATASET_SIZE,
+                                  },
+                                },
+                              )}
                             {/if}
                           {/if}
                         </div>
@@ -469,7 +528,7 @@
                             : ''}"
                           on:click={add_eval_data}
                         >
-                          {$_('evaluation.main_page.add_eval_data')}
+                          {$_("evaluation.main_page.add_eval_data")}
                         </button>
                       </div>
                     {:else if step == 3}
@@ -477,7 +536,9 @@
                         {#if golden_dataset_explanation}
                           {golden_dataset_explanation}
                         {:else}
-                          {$_('evaluation.main_page.golden_dataset_status.complete')}
+                          {$_(
+                            "evaluation.main_page.golden_dataset_status.complete",
+                          )}
                         {/if}
                       </div>
                       <div>
@@ -488,29 +549,43 @@
                               : ''}"
                             on:click={show_golden_dataset}
                           >
-                            {golden_dataset_explanation ? $_('evaluation.main_page.rate_golden_dataset') : $_('evaluation.main_page.view_golden_dataset')}
+                            {golden_dataset_explanation
+                              ? $_("evaluation.main_page.rate_golden_dataset")
+                              : $_("evaluation.main_page.view_golden_dataset")}
                           </button>
                         {:else}
                           <!-- We always use "tag::" so this shouldn't happen unless it's created by code. -->
-                          {$_('evaluation.main_page.golden_dataset_filter_note', { values: { filter: evaluator.eval_configs_filter_id } })}
+                          {$_(
+                            "evaluation.main_page.golden_dataset_filter_note",
+                            {
+                              values: {
+                                filter: evaluator.eval_configs_filter_id,
+                              },
+                            },
+                          )}
                           <a
                             class="link"
                             href={`/dataset/${project_id}/${task_id}`}
-                            >{$_('dataset.title')}</a
+                            >{$_("dataset.title")}</a
                           >.
                         {/if}
                       </div>
                     {:else if step == 4}
                       <div class="mb-1">
                         {#if eval_progress?.current_eval_method}
-                          {$_('evaluation.main_page.eval_method_selected', { 
-                            values: { 
-                              method: eval_config_to_ui_name(eval_progress.current_eval_method.config_type),
-                              model: model_name(eval_progress.current_eval_method.model_name, $model_info)
-                            } 
+                          {$_("evaluation.main_page.eval_method_selected", {
+                            values: {
+                              method: eval_config_to_ui_name(
+                                eval_progress.current_eval_method.config_type,
+                              ),
+                              model: model_name(
+                                eval_progress.current_eval_method.model_name,
+                                $model_info,
+                              ),
+                            },
                           })}
                         {:else}
-                          {$_('evaluation.main_page.eval_method_not_selected')}
+                          {$_("evaluation.main_page.eval_method_not_selected")}
                         {/if}
                       </div>
                       <div>
@@ -520,27 +595,30 @@
                             : ''}"
                           on:click={compare_eval_methods}
                         >
-                          {$_('evaluation.main_page.compare_eval_methods')}
+                          {$_("evaluation.main_page.compare_eval_methods")}
                         </button>
                       </div>
                     {:else if step == 5}
                       <div class="mb-1">
                         {#if eval_progress?.current_run_method}
-                          {$_('evaluation.main_page.run_method_selected', { 
-                            values: { 
+                          {$_("evaluation.main_page.run_method_selected", {
+                            values: {
                               model: model_name(
-                                eval_progress.current_run_method.run_config_properties.model_name,
+                                eval_progress.current_run_method
+                                  .run_config_properties.model_name,
                                 $model_info,
                               ),
-                              prompt: eval_progress.current_run_method.prompt?.name ||
+                              prompt:
+                                eval_progress.current_run_method.prompt?.name ||
                                 prompt_name_from_id(
-                                  eval_progress.current_run_method.run_config_properties.prompt_id,
+                                  eval_progress.current_run_method
+                                    .run_config_properties.prompt_id,
                                   $current_task_prompts,
-                                )
-                            } 
+                                ),
+                            },
                           })}
                         {:else}
-                          {$_('evaluation.main_page.run_method_not_selected')}
+                          {$_("evaluation.main_page.run_method_not_selected")}
                         {/if}
                       </div>
                       <div>
@@ -550,7 +628,7 @@
                             : ''}"
                           on:click={compare_run_methods}
                         >
-                          {$_('evaluation.main_page.compare_run_methods')}
+                          {$_("evaluation.main_page.compare_run_methods")}
                         </button>
                       </div>
                     {/if}
@@ -562,7 +640,9 @@
         </div>
 
         <div class="w-72 2xl:w-96 flex-none">
-          <div class="text-xl font-bold mb-4">{$_('evaluation.main_page.evaluator_properties')}</div>
+          <div class="text-xl font-bold mb-4">
+            {$_("evaluation.main_page.evaluator_properties")}
+          </div>
           <div
             class="grid grid-cols-[auto,1fr] gap-y-2 gap-x-4 text-sm 2xl:text-base"
           >
@@ -590,20 +670,22 @@
 
 <EditDialog
   bind:this={edit_dialog}
-  name={$_('evaluation.main_page.edit_dialog.name')}
+  name={$_("evaluation.main_page.edit_dialog.name")}
   patch_url={`/api/projects/${project_id}/tasks/${task_id}/eval/${eval_id}`}
   delete_url={`/api/projects/${project_id}/tasks/${task_id}/eval/${eval_id}`}
   fields={[
     {
-      label: $_('evaluation.main_page.edit_dialog.eval_name_label'),
-      description: $_('evaluation.main_page.edit_dialog.eval_name_description'),
+      label: $_("evaluation.main_page.edit_dialog.eval_name_label"),
+      description: $_("evaluation.main_page.edit_dialog.eval_name_description"),
       api_name: "name",
       value: evaluator?.name || "",
       input_type: "input",
     },
     {
-      label: $_('evaluation.main_page.edit_dialog.description_label'),
-      description: $_('evaluation.main_page.edit_dialog.description_description'),
+      label: $_("evaluation.main_page.edit_dialog.description_label"),
+      description: $_(
+        "evaluation.main_page.edit_dialog.description_description",
+      ),
       api_name: "description",
       value: evaluator?.description || "",
       input_type: "textarea",

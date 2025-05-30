@@ -1,6 +1,6 @@
 <script lang="ts">
   import ConnectProviders from "./connect_providers.svelte"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   let has_connected_providers = false
   let intermediate_step = false
@@ -13,10 +13,10 @@
   <img src="/logo.svg" alt="logo" class="size-8 mb-3" />
 </div>
 <h1 class="text-2xl lg:text-4xl flex-none font-bold text-center">
-  {$_('setup.connect_ai_providers')}
+  {$_("setup.connect_ai_providers")}
 </h1>
 <h3 class="text-base font-medium text-center mt-3 max-w-[600px] mx-auto">
-  {$_('setup.connect_providers_subtitle')}
+  {$_("setup.connect_providers_subtitle")}
 </h3>
 
 <div
@@ -32,6 +32,8 @@
     href="/setup/create_project"
     class="flex-none {next_visible ? '' : 'hidden'}"
   >
-    <button class="btn btn-primary w-full min-w-[130px]"> {$_('common.continue')} </button>
+    <button class="btn btn-primary w-full min-w-[130px]">
+      {$_("common.continue")}
+    </button>
   </a>
 </div>

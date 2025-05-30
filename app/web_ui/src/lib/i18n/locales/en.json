@@ -278,7 +278,7 @@
       "see_docs": "see docs",
       "supported_columns": "The following columns are supported:",
       "input_required": "Required",
-      "output_required": "Required", 
+      "output_required": "Required",
       "reasoning_optional": "Optional",
       "chain_of_thought_optional": "Optional",
       "tags_optional": "Optional, comma separated string"
@@ -340,7 +340,7 @@
     "intermediate_output_tooltip": "This is intermediate output from the model, and not considered part of the final answer. This thinking helped formulate the final answer above. This is known as 'chain of thought', 'thinking output', or 'inference time compute'.",
     "type_descriptions": {
       "string": "String",
-      "number": "Number", 
+      "number": "Number",
       "integer": "Integer",
       "boolean": "'true' or 'false'",
       "array": "JSON Array",
@@ -693,7 +693,7 @@
   },
   "forms": {
     "required": "Required",
-    "optional": "Optional", 
+    "optional": "Optional",
     "field_required": "{label} is required",
     "field_too_long": "{label} must be no more than {maxLength} characters",
     "required_field": "This field is required",
@@ -1227,7 +1227,7 @@
       "create_fine_tune": "Create Fine Tune",
       "table_headers": {
         "name": "Name",
-        "type": "Type", 
+        "type": "Type",
         "provider": "Provider",
         "base_model": "Base Model",
         "status": "Status",
@@ -1235,7 +1235,7 @@
       },
       "status_values": {
         "pending": "Pending",
-        "running": "Running", 
+        "running": "Running",
         "completed": "Completed",
         "failed": "Failed",
         "unknown": "Unknown"
@@ -1319,7 +1319,7 @@
     "confirm_revert_to_visual": "Revert to the visual schema editor?\n\nChanges made to the raw JSON schema will be lost.",
     "types": {
       "string": "String",
-      "number": "Number", 
+      "number": "Number",
       "integer": "Integer",
       "boolean": "Boolean",
       "array": "Array",
@@ -1375,7 +1375,7 @@
     },
     "warning": {
       "exclamation_icon_alt": "Warning icon",
-      "info_icon_alt": "Information icon", 
+      "info_icon_alt": "Information icon",
       "check_icon_alt": "Success icon"
     }
   },
@@ -1383,4 +1383,4 @@
     "fine_tune_prompt": "Fine-Tune Prompt",
     "model_id_prefix": "Model ID:"
   }
-} 
+}

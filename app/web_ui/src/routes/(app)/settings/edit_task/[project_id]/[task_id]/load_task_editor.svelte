@@ -25,7 +25,7 @@
     try {
       loading = true
       if (!project_id || !task_id) {
-        throw new Error($_('task.project_or_task_id_missing'))
+        throw new Error($_("task.project_or_task_id_missing"))
       }
       // Always load the task from the server, even if it's the current task. We want the freshest data.
       const { data: task_response, error: get_error } = await client.GET(
@@ -46,15 +46,14 @@
         // Clone mode means we're creating a new task with the same content as the existing one.
         // We don't want to pass the ID to the edit task component, so we set it to null.
         task_response.id = null
-        task_response.name = $_('task.copy_of', { values: { name: task_response.name } })
+        task_response.name = $_("task.copy_of", {
+          values: { name: task_response.name },
+        })
       }
       task = task_response
     } catch (e) {
       if (e instanceof Error && e.message.includes("Load failed")) {
-        error = new KilnError(
-          $_('task.task_access_error'),
-          null,
-        )
+        error = new KilnError($_("task.task_access_error"), null)
       } else {
         error = createKilnError(e)
       }
@@ -69,7 +68,9 @@
     <div class="loading loading-spinner loading-lg"></div>
   </div>
 {:else if error}
-  <div class="text-red-500">{$_('task.error_loading_task')}: {error.getMessage()}</div>
+  <div class="text-red-500">
+    {$_("task.error_loading_task")}: {error.getMessage()}
+  </div>
 {:else if task}
   <EditTask
     {task}

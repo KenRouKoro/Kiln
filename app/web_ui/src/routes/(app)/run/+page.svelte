@@ -10,7 +10,7 @@
   import type { TaskRun } from "$lib/types"
   import AvailableModelsDropdown from "./available_models_dropdown.svelte"
   import RunInputForm from "./run_input_form.svelte"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   // TODO: implement checking input content
   // let warn_before_unload
@@ -32,7 +32,7 @@
   let response: TaskRun | null = null
   $: run_focus = !response
 
-  $: subtitle = $current_task ? $_('run.task_prefix') + $current_task.name : ""
+  $: subtitle = $current_task ? $_("run.task_prefix") + $current_task.name : ""
   $: input_schema = $current_task?.input_json_schema
   $: requires_structured_output = !!$current_task?.output_json_schema
 
@@ -45,8 +45,8 @@
       model_dropdown_error_message = null
       let selected_model = model_dropdown.get_selected_model()
       if (!selected_model || selected_model != model) {
-        model_dropdown_error_message = $_('run.required')
-        throw new Error($_('run.model_selection_error'))
+        model_dropdown_error_message = $_("run.required")
+        throw new Error($_("run.model_selection_error"))
       }
       const {
         data, // only present if 2XX response
@@ -95,15 +95,15 @@
 
 <div class="max-w-[1400px]">
   <AppPage
-    title={$_('run.title')}
+    title={$_("run.title")}
     bind:subtitle
-    action_buttons={[{ label: $_('run.clear_all'), handler: clear_all }]}
+    action_buttons={[{ label: $_("run.clear_all"), handler: clear_all }]}
   >
     <div class="flex flex-col xl:flex-row gap-8 xl:gap-16">
       <div class="grow">
-        <div class="text-xl font-bold mb-4">{$_('run.input')}</div>
+        <div class="text-xl font-bold mb-4">{$_("run.input")}</div>
         <FormContainer
-          submit_label={$_('run.title')}
+          submit_label={$_("run.title")}
           on:submit={run_task}
           bind:error
           bind:submitting
@@ -114,11 +114,11 @@
         </FormContainer>
       </div>
       <div class="w-72 2xl:w-96 flex-none flex flex-col gap-4">
-        <div class="text-xl font-bold">{$_('run.options')}</div>
+        <div class="text-xl font-bold">{$_("run.options")}</div>
         <div>
           <PromptTypeSelector
             bind:prompt_method
-            info_description={$_('run.choose_prompt_description')}
+            info_description={$_("run.choose_prompt_description")}
             bind:linked_model_selection={model}
           />
         </div>
@@ -149,7 +149,7 @@
           class="btn btn-primary mt-2 min-w-48"
           on:click={() => next_task_run()}
         >
-          {$_('run.next_run')}
+          {$_("run.next_run")}
         </button>
       </div>
     {/if}

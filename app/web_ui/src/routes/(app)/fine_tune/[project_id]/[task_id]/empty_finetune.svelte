@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from "svelte-i18n"
-  
+
   export let project_id: string
   export let task_id: string
 </script>

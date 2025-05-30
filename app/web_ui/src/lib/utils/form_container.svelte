@@ -125,11 +125,7 @@
       return
     }
     if (warn_before_unload) {
-      if (
-        !confirm(
-          $_('forms.unsaved_changes_warning')
-        )
-      ) {
+      if (!confirm($_("forms.unsaved_changes_warning"))) {
         navigation.cancel()
       }
     }
@@ -174,7 +170,7 @@
     {#if has_validation_errors}
       <div class="text-sm text-center text-error">
         <button class="link" on:click={() => focus_first_error()}
-          >{$_('forms.please_correct_errors')}</button
+          >{$_("forms.please_correct_errors")}</button
         >
       </div>
     {/if}
@@ -194,7 +190,7 @@
       disabled={submitting}
     >
       {#if ui_saved_indicator}
-        {$_('forms.saved')}
+        {$_("forms.saved")}
       {:else if !submitting}
         {submit_label}
         <span

@@ -13,7 +13,7 @@
   import Warning from "$lib/ui/warning.svelte"
   import { progress_ui_state } from "$lib/stores/progress_ui_store"
   import { page } from "$app/stores"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   let finetune_dataset_info: FinetuneDatasetInfo | null = null
   let loading = true
@@ -72,12 +72,12 @@
 
   $: tag_select_options = [
     {
-      label: $_('finetune.dataset_filter_tag'),
+      label: $_("finetune.dataset_filter_tag"),
       options:
         finetune_dataset_info?.finetune_tags?.map((tag) => ({
           label: tag.tag,
           value: tag.tag,
-          description: `${$_('common.tags')} '${tag.tag}' ${$_('common.has')} ${tag.count} ${$_('common.samples')}.`,
+          description: `${$_("common.tags")} '${tag.tag}' ${$_("common.has")} ${tag.count} ${$_("common.samples")}.`,
         })) || [],
     },
   ]
@@ -92,8 +92,8 @@
       ? [
           {
             id: "existing_dataset",
-            name: $_('finetune.reuse_existing_dataset'),
-            description: $_('finetune.reuse_existing_description'),
+            name: $_("finetune.reuse_existing_dataset"),
+            description: $_("finetune.reuse_existing_description"),
           },
         ]
       : []),
@@ -101,8 +101,8 @@
       ? [
           {
             id: "new_dataset",
-            name: $_('finetune.create_new_dataset'),
-            description: $_('finetune.create_new_description'),
+            name: $_("finetune.create_new_dataset"),
+            description: $_("finetune.create_new_description"),
           },
         ]
       : []),
@@ -110,8 +110,8 @@
       ? [
           {
             id: "add",
-            name: $_('finetune.add_finetune_data'),
-            description: $_('finetune.add_data_description'),
+            name: $_("finetune.add_finetune_data"),
+            description: $_("finetune.add_data_description"),
           },
         ]
       : []),
@@ -201,10 +201,10 @@
 
   function show_add_data() {
     progress_ui_state.set({
-      title: $_('finetune.creating_finetune'),
-      body: $_('finetune.when_done_adding'),
+      title: $_("finetune.creating_finetune"),
+      body: $_("finetune.when_done_adding"),
       link: $page.url.pathname,
-      cta: $_('finetune.return_to_finetuning'),
+      cta: $_("finetune.return_to_finetuning"),
       progress: null,
       step_count: 4,
       current_step: 2,
@@ -233,11 +233,11 @@
 
   function status_message(count: number) {
     if (count === 0) {
-      return $_('finetune.zero_samples_error')
+      return $_("finetune.zero_samples_error")
     } else if (count < 50) {
-      return $_('finetune.few_samples_warning', { values: { count } })
+      return $_("finetune.few_samples_warning", { values: { count } })
     } else {
-      return $_('finetune.samples_count_info', { values: { count } })
+      return $_("finetune.samples_count_info", { values: { count } })
     }
   }
 </script>
@@ -248,7 +248,7 @@
   </div>
 {:else if error}
   <div class="text-error text-sm">
-    {error.getMessage() || $_('errors.unknown_error')}
+    {error.getMessage() || $_("errors.unknown_error")}
   </div>
 {:else if finetune_dataset_info}
   <div>
@@ -258,35 +258,44 @@
           class="text-sm input input-bordered flex place-items-center w-full"
         >
           <div>
-            {$_('finetune.dataset_created', { values: { name: selected_dataset.name, date: formatDate(selected_dataset.created_at) } })}
+            {$_("finetune.dataset_created", {
+              values: {
+                name: selected_dataset.name,
+                date: formatDate(selected_dataset.created_at),
+              },
+            })}
           </div>
         </div>
         <button class="btn btn-sm btn-md" on:click={edit_dataset}
-          >{$_('finetune.change_dataset')}</button
+          >{$_("finetune.change_dataset")}</button
         >
       </div>
 
       <div class="collapse collapse-arrow bg-base-200 mt-4">
         <input type="checkbox" class="peer" />
         <div class="collapse-title font-medium flex items-center">
-          {$_('finetune.training_dataset_details')}
+          {$_("finetune.training_dataset_details")}
         </div>
         <div class="collapse-content flex flex-col gap-4">
           <div class="text-sm">
-            {$_('finetune.dataset_has_splits', { values: { count: selected_dataset.splits?.length } })}
+            {$_("finetune.dataset_has_splits", {
+              values: { count: selected_dataset.splits?.length },
+            })}
             <ul class="list-disc list-inside pt-2">
               {#each Object.entries(selected_dataset.split_contents) as [split_name, split_contents]}
                 <li>
                   {split_name.charAt(0).toUpperCase() +
                     split_name.slice(1)}:{" "}
-                  {$_('finetune.examples_count', { values: { count: split_contents.length } })}
+                  {$_("finetune.examples_count", {
+                    values: { count: split_contents.length },
+                  })}
                   <span class="text-xs text-gray-500 pl-2">
                     {#if split_name === "val"}
-                      {$_('finetune.split_val')}
+                      {$_("finetune.split_val")}
                     {:else if split_name === "test"}
-                      {$_('finetune.split_test')}
+                      {$_("finetune.split_test")}
                     {:else if split_name === "train" || split_name === "all"}
-                      {$_('finetune.split_train')}
+                      {$_("finetune.split_train")}
                     {/if}
                   </span>
                 </li>
@@ -299,24 +308,28 @@
       <OptionList options={top_options} select_option={select_top_option} />
       {#if can_select_dataset}
         <div class="pt-4 font-light">
-          {$_('common.or')}
+          {$_("common.or")}
           <button class="link font-normal" on:click={show_add_data}
-            >{$_('finetune.add_additional_data')}</button
-          > {$_('common.before_you_start')}.
+            >{$_("finetune.add_additional_data")}</button
+          >
+          {$_("common.before_you_start")}.
         </div>
       {/if}
     {/if}
   </div>
 {/if}
 
-<Dialog title={$_('finetune.new_finetune_dataset')} bind:this={create_dataset_dialog}>
+<Dialog
+  title={$_("finetune.new_finetune_dataset")}
+  bind:this={create_dataset_dialog}
+>
   <div class="font-light text-sm mb-6">
     <div class="font-light text-sm mb-6">
-      {$_('finetune.snapshot_subset')}
+      {$_("finetune.snapshot_subset")}
     </div>
     <div class="flex flex-row gap-6 justify-center flex-col">
       <FormContainer
-        submit_label={$_('finetune.create_dataset')}
+        submit_label={$_("finetune.create_dataset")}
         on:submit={create_dataset}
         bind:error={create_dataset_split_error}
         bind:submitting={create_dataset_split_loading}
@@ -325,9 +338,9 @@
       >
         <div class="flex flex-col gap-4">
           <FormElement
-            label={$_('finetune.dataset_filter_tag')}
-            description={$_('finetune.select_tag_description')}
-            info_description={$_('finetune.available_tags_info')}
+            label={$_("finetune.dataset_filter_tag")}
+            description={$_("finetune.select_tag_description")}
+            info_description={$_("finetune.available_tags_info")}
             inputType="fancy_select"
             optional={false}
             id="dataset_filter"
@@ -337,15 +350,15 @@
 
           <FormElement
             inputType="checkbox"
-            label={$_('finetune.filter_reasoning_samples')}
-            info_description={$_('finetune.reasoning_samples_info')}
+            label={$_("finetune.filter_reasoning_samples")}
+            info_description={$_("finetune.reasoning_samples_info")}
             id="use_reasoning_data"
             bind:value={filter_to_reasoning_data}
           />
           <FormElement
             inputType="checkbox"
-            label={$_('finetune.filter_highly_rated')}
-            info_description={$_('finetune.highly_rated_info')}
+            label={$_("finetune.filter_highly_rated")}
+            info_description={$_("finetune.highly_rated_info")}
             id="filter_to_highly_rated_data"
             bind:value={filter_to_highly_rated_data}
           />
@@ -353,25 +366,22 @@
           <div class="collapse collapse-arrow bg-base-200">
             <input type="checkbox" class="peer" />
             <div class="collapse-title font-medium flex items-center">
-              {$_('finetune.advanced_options')}
+              {$_("finetune.advanced_options")}
             </div>
             <div class="collapse-content flex flex-col gap-4">
               <FormElement
-                label={$_('finetune.dataset_splits')}
-                description={$_('finetune.splits_description')}
-                info_description={$_('finetune.splits_info')}
+                label={$_("finetune.dataset_splits")}
+                description={$_("finetune.splits_description")}
+                info_description={$_("finetune.splits_info")}
                 inputType="select"
                 optional={false}
                 id="dataset_split"
                 select_options={[
-                  ["train_val", $_('finetune.train_val_80_20')],
-                  ["train_test", $_('finetune.train_test_80_10_10')],
-                  ["train_test_val", $_('finetune.train_test_val_60_20_20')],
-                  [
-                    "train_test_val_80",
-                    $_('finetune.train_test_val_80_10_10'),
-                  ],
-                  ["all", $_('finetune.all_training')],
+                  ["train_val", $_("finetune.train_val_80_20")],
+                  ["train_test", $_("finetune.train_test_80_10_10")],
+                  ["train_test_val", $_("finetune.train_test_val_60_20_20")],
+                  ["train_test_val_80", $_("finetune.train_test_val_80_10_10")],
+                  ["all", $_("finetune.all_training")],
                 ]}
                 bind:value={new_dataset_split}
               />
@@ -397,20 +407,20 @@
 </Dialog>
 
 <Dialog
-  title={$_('finetune.select_existing_dataset')}
+  title={$_("finetune.select_existing_dataset")}
   bind:this={existing_dataset_dialog}
   action_buttons={[
     {
-      label: $_('common.cancel'),
+      label: $_("common.cancel"),
       isCancel: true,
     },
   ]}
 >
   {#if !finetune_dataset_info}
-    <div class="text-error">{$_('finetune.no_existing_datasets')}</div>
+    <div class="text-error">{$_("finetune.no_existing_datasets")}</div>
   {:else}
     <div class="font-light text-sm mb-6">
-      {$_('finetune.select_existing_description')}
+      {$_("finetune.select_existing_description")}
     </div>
     <div class="flex flex-col gap-4 text-sm max-w-[600px]">
       {#each finetune_dataset_info.existing_datasets as dataset}
@@ -425,20 +435,26 @@
               existing_dataset_dialog?.close()
             }}
           >
-            <div class="text-xs text-gray-500">{$_('finetune.dataset_name')}</div>
+            <div class="text-xs text-gray-500">
+              {$_("finetune.dataset_name")}
+            </div>
             <div class="text-medium">{dataset.name}</div>
-            <div class="text-xs text-gray-500">{$_('dataset.created_at')}</div>
+            <div class="text-xs text-gray-500">{$_("dataset.created_at")}</div>
             <div>{formatDate(dataset.created_at)}</div>
 
-            <div class="text-xs text-gray-500">{$_('finetune.dataset_size')}</div>
+            <div class="text-xs text-gray-500">
+              {$_("finetune.dataset_size")}
+            </div>
             <div>
               {Object.keys(dataset.split_contents)
                 .map((split_type) => {
-                  return `${dataset.split_contents[split_type].length} ${$_('finetune.in_split', { values: { split: split_type } })}`
+                  return `${dataset.split_contents[split_type].length} ${$_("finetune.in_split", { values: { split: split_type } })}`
                 })
                 .join(", ")}
             </div>
-            <div class="text-xs text-gray-500">{$_('finetune.tunes_using_dataset')}</div>
+            <div class="text-xs text-gray-500">
+              {$_("finetune.tunes_using_dataset")}
+            </div>
             <div>{finetunes.map((f) => f.name).join(", ")}</div>
           </button>
         {/if}

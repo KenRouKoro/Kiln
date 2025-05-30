@@ -6,7 +6,7 @@
   import FormElement from "$lib/utils/form_element.svelte"
   import { provider_name_from_id } from "$lib/stores"
   import Dialog from "$lib/ui/dialog.svelte"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   let connected_providers: [string, string][] = []
   let loading_providers = true
@@ -25,7 +25,7 @@
         throw settings_error
       }
       if (!settings) {
-        throw new KilnError($_('providers.settings_not_found'), null)
+        throw new KilnError($_("providers.settings_not_found"), null)
       }
       custom_models = settings["custom_models"] || []
       if (settings["open_ai_api_key"]) {
@@ -104,10 +104,7 @@
       await save_model_list()
       new_model_name = null
     } else {
-      throw new KilnError(
-        $_('providers.invalid_model_error'),
-        null,
-      )
+      throw new KilnError($_("providers.invalid_model_error"), null)
     }
 
     return true
@@ -126,7 +123,7 @@
         throw save_error
       }
       if (!save_result) {
-        throw new KilnError($_('providers.no_response_error'), null)
+        throw new KilnError($_("providers.no_response_error"), null)
       }
     } catch (e) {
       save_model_list_error = createKilnError(e)
@@ -149,12 +146,12 @@
 </script>
 
 <AppPage
-  title={$_('providers.add_models')}
-  sub_subtitle={$_('providers.add_models_subtitle')}
+  title={$_("providers.add_models")}
+  sub_subtitle={$_("providers.add_models_subtitle")}
   action_buttons={custom_models && custom_models.length > 0
     ? [
         {
-          label: $_('providers.add_model'),
+          label: $_("providers.add_model"),
           primary: true,
           handler: show_add_model_modal,
         },
@@ -183,7 +180,7 @@
           </div>
           <button
             on:click={() => remove_model(index)}
-            class="link text-sm text-gray-500">{$_('common.remove')}</button
+            class="link text-sm text-gray-500">{$_("common.remove")}</button
           >
         </div>
       {/each}
@@ -194,49 +191,52 @@
         class="btn btn-wide btn-primary mt-4"
         on:click={show_add_model_modal}
       >
-        {$_('providers.add_model')}
+        {$_("providers.add_model")}
       </button>
     </div>
   {/if}
   {#if saving_model_list}
     <div class="flex flex-row gap-2 mt-4">
       <div class="loading loading-spinner"></div>
-      {$_('providers.saving')}
+      {$_("providers.saving")}
     </div>
   {:else if save_model_list_error}
     <div class="mt-4 text-error font-medium">
-      <span>{$_('providers.error_saving_model_list')} {save_model_list_error.message}</span>
+      <span
+        >{$_("providers.error_saving_model_list")}
+        {save_model_list_error.message}</span
+      >
     </div>
   {/if}
 </AppPage>
 
 <Dialog
   bind:this={add_model_dialog}
-  title={$_('providers.add_model')}
+  title={$_("providers.add_model")}
   action_buttons={[
-    { label: $_('common.cancel'), isCancel: true },
+    { label: $_("common.cancel"), isCancel: true },
     {
-      label: $_('providers.add_model'),
+      label: $_("providers.add_model"),
       asyncAction: add_model,
       disabled: !new_model_provider || !new_model_name,
       isPrimary: true,
     },
   ]}
 >
-  <div class="text-sm">{$_('providers.add_model_from_provider')}</div>
+  <div class="text-sm">{$_("providers.add_model_from_provider")}</div>
   <div class="text-sm text-gray-500 mt-3">
-    {$_('providers.model_id_instructions')}
+    {$_("providers.model_id_instructions")}
   </div>
   <div class="flex flex-col gap-4 mt-8">
     <FormElement
-      label={$_('providers.model_provider')}
+      label={$_("providers.model_provider")}
       id="model_provider"
       inputType="select"
       select_options={connected_providers}
       bind:value={new_model_provider}
     />
     <FormElement
-      label={$_('providers.model_name')}
+      label={$_("providers.model_name")}
       id="model_name"
       inputType="input"
       bind:value={new_model_name}

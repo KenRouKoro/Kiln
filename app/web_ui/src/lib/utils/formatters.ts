@@ -24,7 +24,9 @@ export function formatDate(dateString: string | undefined): string {
         hour: "numeric",
         minute: "2-digit",
         hour12: true,
-      }) + " " + get(_)("formatters.today")
+      }) +
+      " " +
+      get(_)("formatters.today")
     )
   }
 

@@ -108,7 +108,10 @@ export async function load_projects() {
   } catch (error: unknown) {
     const all_projects: AllProjects = {
       projects: [],
-      error: get(_)("errors.issue_loading_projects") + " " + createKilnError(error).getMessage(),
+      error:
+        get(_)("errors.issue_loading_projects") +
+        " " +
+        createKilnError(error).getMessage(),
     }
     projects.set(all_projects)
   }
@@ -171,7 +174,8 @@ export async function load_current_task(project: Project | null) {
     // Can't load this task, likely deleted. Clear the ID, which will force the user to select a new task
     if (dev) {
       alert(
-        get(_)("errors.removing_current_task_id") + " " +
+        get(_)("errors.removing_current_task_id") +
+          " " +
           createKilnError(error).getMessage(),
       )
     }

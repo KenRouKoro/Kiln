@@ -57,32 +57,37 @@
 </script>
 
 <div class="max-w-[1400px]">
-  <AppPage title={$_('prompts.generator_details.title')} subtitle={generator_name}>
+  <AppPage
+    title={$_("prompts.generator_details.title")}
+    subtitle={generator_name}
+  >
     {#if prompt_loading}
       <div class="w-full min-h-[50vh] flex justify-center items-center">
         <div class="loading loading-spinner loading-lg"></div>
       </div>
     {:else if $current_task?.id != task_id}
       <div class="text-error">
-        {$_('prompts.generator_details.task_link_error')}
+        {$_("prompts.generator_details.task_link_error")}
       </div>
     {:else if prompt && !prompt_error}
       <div>
-        <h2 class="text-sm font-medium mt-4 mb-1">{$_('prompts.generator_details.generator_description')}</h2>
+        <h2 class="text-sm font-medium mt-4 mb-1">
+          {$_("prompts.generator_details.generator_description")}
+        </h2>
         <p class="mb-6 text-sm text-gray-500">
           {generator_description}
         </p>
 
         <h2 class="text-sm font-medium mt-4 mb-1">
-          {$_('prompts.generator_details.how_to_improve')}
+          {$_("prompts.generator_details.how_to_improve")}
         </h2>
         <p class="mb-6 text-sm text-gray-500">
-          {$_('prompts.generator_details.improve_description')} <a
-            href={`/settings/edit_task/${project_id}/${task_id}`}
-            class="link"
-            >{$_('prompts.generator_details.edit_task_link_text')}{generator_id !==
-            "short_prompt_builder"
-              ? $_('prompts.generator_details.requirements_text')
+          {$_("prompts.generator_details.improve_description")}
+          <a href={`/settings/edit_task/${project_id}/${task_id}`} class="link"
+            >{$_(
+              "prompts.generator_details.edit_task_link_text",
+            )}{generator_id !== "short_prompt_builder"
+              ? $_("prompts.generator_details.requirements_text")
               : ""}</a
           ><span
             class={["simple_prompt_builder", "short_prompt_builder"].includes(
@@ -90,24 +95,26 @@
             )
               ? "hidden"
               : ""}
-            >{$_('prompts.generator_details.additional_improvement')} <a
-              class="link"
-              href="/run">{$_('prompts.generator_details.run_link_text')}</a
-            >{$_('prompts.generator_details.additional_improvement_suffix')}
+            >{$_("prompts.generator_details.additional_improvement")}
+            <a class="link" href="/run"
+              >{$_("prompts.generator_details.run_link_text")}</a
+            >{$_("prompts.generator_details.additional_improvement_suffix")}
           </span>
         </p>
 
-        <h2 class="text-sm font-medium mt-4 mb-1">{$_('prompts.generator_details.generated_prompt')}</h2>
+        <h2 class="text-sm font-medium mt-4 mb-1">
+          {$_("prompts.generator_details.generated_prompt")}
+        </h2>
         <p class="mb-2 text-sm text-gray-500">
-          {$_('prompts.generator_details.generated_prompt_description', {
-            values: { generator_name }
+          {$_("prompts.generator_details.generated_prompt_description", {
+            values: { generator_name },
           })}
         </p>
         <Output raw_output={prompt} />
       </div>
     {:else}
       <div class="text-error">
-        {prompt_error?.getMessage() || $_('common.error')}
+        {prompt_error?.getMessage() || $_("common.error")}
       </div>
     {/if}
   </AppPage>

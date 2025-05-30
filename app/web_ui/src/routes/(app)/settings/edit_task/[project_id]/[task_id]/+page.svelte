@@ -29,15 +29,15 @@
 
 <div class="max-w-[900px]">
   <AppPage
-    title={$_('task.edit_task')}
-    subtitle={task_id ? `${$_('task.task_id')}: ${task_id}` : undefined}
+    title={$_("task.edit_task")}
+    subtitle={task_id ? `${$_("task.task_id")}: ${task_id}` : undefined}
     action_buttons={[
       {
         icon: "/images/delete.svg",
         handler: () => delete_dialog?.show(),
       },
       {
-        label: $_('task.clone_task'),
+        label: $_("task.clone_task"),
         primary: true,
         handler: () => {
           goto(`/settings/clone_task/${project_id}/${task_id}`)
@@ -50,7 +50,7 @@
 </div>
 
 <DeleteDialog
-  name={$_('common.task')}
+  name={$_("common.task")}
   bind:this={delete_dialog}
   {delete_url}
   {after_delete}

@@ -1,6 +1,6 @@
-import '../lib/i18n';
-import { browser } from '$app/environment';
-import { locale, waitLocale } from 'svelte-i18n';
+import "../lib/i18n"
+import { browser } from "$app/environment"
+import { locale, waitLocale } from "svelte-i18n"
 import posthog from "posthog-js"
 import { dev } from "$app/environment"
 
@@ -17,10 +17,10 @@ export const load = async () => {
     })
   }
   if (browser) {
-    const savedLocale = localStorage.getItem('locale');
+    const savedLocale = localStorage.getItem("locale")
     if (savedLocale) {
-      locale.set(savedLocale);
+      locale.set(savedLocale)
     }
   }
-  await waitLocale();
+  await waitLocale()
 }

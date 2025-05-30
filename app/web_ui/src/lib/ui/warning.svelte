@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n'
-  
+  import { _ } from "svelte-i18n"
+
   export let warning_message: string | undefined | null = undefined
   export let warning_color:
     | "error"
@@ -67,7 +67,9 @@
         viewBox="0 0 256 256"
         id="Flat"
         xmlns="http://www.w3.org/2000/svg"
-        aria-label={warning_icon === 'info' ? $_('ui.warning.info_icon_alt') : $_('ui.warning.exclamation_icon_alt')}
+        aria-label={warning_icon === "info"
+          ? $_("ui.warning.info_icon_alt")
+          : $_("ui.warning.exclamation_icon_alt")}
         role="img"
       >
         <path
@@ -83,7 +85,7 @@
         viewBox="0 0 24 24"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        aria-label={$_('ui.warning.check_icon_alt')}
+        aria-label={$_("ui.warning.check_icon_alt")}
         role="img"
       >
         <path

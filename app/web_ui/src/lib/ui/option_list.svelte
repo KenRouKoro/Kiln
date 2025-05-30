@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n'
-  
+  import { _ } from "svelte-i18n"
+
   export let options: {
     id: string
     name: string
@@ -25,7 +25,7 @@
       >
         {#if option.recommended}
           <div class="indicator-item indicator-center badge badge-primary">
-            {$_('common.recommended')}
+            {$_("common.recommended")}
           </div>
         {:else if option.highlight_title}
           <div class="indicator-item indicator-center badge badge-secondary">

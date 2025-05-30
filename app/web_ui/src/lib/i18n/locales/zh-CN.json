@@ -340,7 +340,7 @@
     "intermediate_output_tooltip": "这是模型的中间输出，不被视为最终答案的一部分。这种思考有助于形成上面的最终答案。这被称为'思维链'、'思考输出'或'推理时计算'。",
     "type_descriptions": {
       "string": "字符串",
-      "number": "数字", 
+      "number": "数字",
       "integer": "整数",
       "boolean": "'true' 或 'false'",
       "array": "JSON 数组",
@@ -1227,7 +1227,7 @@
       "create_fine_tune": "创建微调",
       "table_headers": {
         "name": "名称",
-        "type": "类型", 
+        "type": "类型",
         "provider": "提供商",
         "base_model": "基础模型",
         "status": "状态",
@@ -1235,7 +1235,7 @@
       },
       "status_values": {
         "pending": "等待中",
-        "running": "运行中", 
+        "running": "运行中",
         "completed": "已完成",
         "failed": "失败",
         "unknown": "未知"
@@ -1319,7 +1319,7 @@
     "confirm_revert_to_visual": "恢复到可视化模式编辑器？\n\n对原始 JSON Schema 所做的更改将丢失。",
     "types": {
       "string": "字符串",
-      "number": "数字", 
+      "number": "数字",
       "integer": "整数",
       "boolean": "布尔值",
       "array": "数组",
@@ -1375,7 +1375,7 @@
     },
     "warning": {
       "exclamation_icon_alt": "警告图标",
-      "info_icon_alt": "信息图标", 
+      "info_icon_alt": "信息图标",
       "check_icon_alt": "成功图标"
     }
   },
@@ -1385,4 +1385,4 @@
   },
   "project_required_error": "创建任务前必须先创建项目",
   "current_project_not_found": "未找到当前项目"
-} 
+}

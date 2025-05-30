@@ -51,7 +51,7 @@
     {/each}
   {:else if type === "custom"}
     <div class="text-sm text-gray-500 pl-2">
-      {$_('rating.custom_type_not_supported')}
+      {$_("rating.custom_type_not_supported")}
     </div>
   {:else if type === "pass_fail_critical" || type === "pass_fail"}
     <div class="flex flex-row gap-1 ml-1">
@@ -59,20 +59,20 @@
         class="btn btn-sm btn-outline hover:btn-success {rating === 1
           ? 'btn-secondary'
           : 'text-base-content/40'}"
-        on:click={() => rating_clicked(1)}>{$_('rating.pass')}</button
+        on:click={() => rating_clicked(1)}>{$_("rating.pass")}</button
       >
       <button
         class="btn btn-sm btn-outline hover:btn-warning {rating === 0
           ? 'btn-secondary'
           : 'text-base-content/40'}"
-        on:click={() => rating_clicked(0)}>{$_('rating.fail')}</button
+        on:click={() => rating_clicked(0)}>{$_("rating.fail")}</button
       >
       {#if type === "pass_fail_critical"}
         <button
           class="btn btn-sm btn-outline hover:btn-error {rating === -1
             ? 'btn-secondary'
             : 'text-base-content/40'}"
-          on:click={() => rating_clicked(-1)}>{$_('rating.critical')}</button
+          on:click={() => rating_clicked(-1)}>{$_("rating.critical")}</button
         >
       {/if}
     </div>

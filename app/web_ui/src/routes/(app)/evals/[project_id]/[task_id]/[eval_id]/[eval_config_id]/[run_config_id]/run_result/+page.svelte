@@ -26,7 +26,7 @@
     load_available_models,
   } from "$lib/stores"
   import OutputTypeTablePreview from "../../../output_type_table_preview.svelte"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   let results: EvalRunResult | null = null
   let results_error: KilnError | null = null
@@ -84,19 +84,20 @@
       return {}
     }
     return {
-      [$_('evaluation.results.properties.run_method_name')]: run_config.name,
-      [$_('evaluation.results.properties.model')]: model_name(
+      [$_("evaluation.results.properties.run_method_name")]: run_config.name,
+      [$_("evaluation.results.properties.model")]: model_name(
         run_config.run_config_properties?.model_name,
         $model_info,
       ),
-      [$_('evaluation.results.properties.provider')]: provider_name_from_id(
+      [$_("evaluation.results.properties.provider")]: provider_name_from_id(
         run_config.run_config_properties?.model_provider_name,
       ),
-      [$_('evaluation.results.properties.prompt')]: prompt_name_from_id(
+      [$_("evaluation.results.properties.prompt")]: prompt_name_from_id(
         run_config.run_config_properties?.prompt_id,
         $current_task_prompts,
       ),
-      [$_('evaluation.results.properties.task_inputs_from_dataset')]: evaluator.eval_set_filter_id,
+      [$_("evaluation.results.properties.task_inputs_from_dataset")]:
+        evaluator.eval_set_filter_id,
     }
   }
 
@@ -108,18 +109,24 @@
       return {}
     }
     return {
-      [$_('evaluation.results.properties.eval_name')]: evaluator.name,
-      [$_('evaluation.results.properties.eval_method_name')]: eval_config.name,
-      [$_('evaluation.results.properties.algorithm')]: eval_config_to_ui_name(eval_config.config_type),
-      [$_('evaluation.results.properties.model')]: model_name(eval_config.model_name, $model_info),
-      [$_('evaluation.results.properties.model_provider')]: provider_name_from_id(eval_config.model_provider),
+      [$_("evaluation.results.properties.eval_name")]: evaluator.name,
+      [$_("evaluation.results.properties.eval_method_name")]: eval_config.name,
+      [$_("evaluation.results.properties.algorithm")]: eval_config_to_ui_name(
+        eval_config.config_type,
+      ),
+      [$_("evaluation.results.properties.model")]: model_name(
+        eval_config.model_name,
+        $model_info,
+      ),
+      [$_("evaluation.results.properties.model_provider")]:
+        provider_name_from_id(eval_config.model_provider),
     }
   }
 </script>
 
 <AppPage
-  title={$_('evaluation.results.title')}
-  subtitle={$_('evaluation.results.subtitle')}
+  title={$_("evaluation.results.title")}
+  subtitle={$_("evaluation.results.subtitle")}
 >
   {#if results_loading}
     <div class="w-full min-h-[50vh] flex justify-center items-center">
@@ -129,26 +136,28 @@
     <div
       class="w-full min-h-[50vh] flex flex-col justify-center items-center gap-2"
     >
-      <div class="font-medium">{$_('evaluation.results.error_loading')}</div>
+      <div class="font-medium">{$_("evaluation.results.error_loading")}</div>
       <div class="text-error text-sm">
-        {results_error.getMessage() || $_('errors.unknown_error')}
+        {results_error.getMessage() || $_("errors.unknown_error")}
       </div>
     </div>
   {:else if results && results.results.length === 0}
     <div
       class="w-full min-h-[50vh] flex flex-col justify-center items-center gap-2"
     >
-      <div class="font-medium">{$_('evaluation.results.empty_title')}</div>
+      <div class="font-medium">{$_("evaluation.results.empty_title")}</div>
       <div class="text-error text-sm">
-        {$_('evaluation.results.empty_message')}
+        {$_("evaluation.results.empty_message")}
       </div>
     </div>
   {:else if results}
     <div class="flex flex-col xl:flex-row gap-8 xl:gap-16 mb-8">
       <div class="grow basis-1/2">
-        <div class="text-xl font-bold">{$_('evaluation.results.task_run_method')}</div>
+        <div class="text-xl font-bold">
+          {$_("evaluation.results.task_run_method")}
+        </div>
         <div class="text-sm text-gray-500 mb-4">
-          {$_('evaluation.results.task_run_method_desc')}
+          {$_("evaluation.results.task_run_method_desc")}
         </div>
         <div
           class="grid grid-cols-[auto,1fr] gap-y-2 gap-x-4 text-sm 2xl:text-base"
@@ -162,9 +171,11 @@
         </div>
       </div>
       <div class="grow basis-1/2">
-        <div class="text-xl font-bold">{$_('evaluation.results.evaluation_method')}</div>
+        <div class="text-xl font-bold">
+          {$_("evaluation.results.evaluation_method")}
+        </div>
         <div class="text-sm text-gray-500 mb-4">
-          {$_('evaluation.results.evaluation_method_desc')}
+          {$_("evaluation.results.evaluation_method_desc")}
         </div>
         <div
           class="grid grid-cols-[auto,1fr] gap-y-2 gap-x-4 text-sm 2xl:text-base"
@@ -182,8 +193,8 @@
       <table class="table">
         <thead>
           <tr>
-            <th>{$_('evaluation.results.input_output')}</th>
-            <th>{$_('evaluation.results.thinking')}</th>
+            <th>{$_("evaluation.results.input_output")}</th>
+            <th>{$_("evaluation.results.thinking")}</th>
             {#each results.eval.output_scores as score}
               <th class="text-center">
                 {score.name}
@@ -196,11 +207,15 @@
           {#each results.results as result}
             <tr>
               <td>
-                <div class="font-medium">{$_('evaluation.results.input_label')}</div>
+                <div class="font-medium">
+                  {$_("evaluation.results.input_label")}
+                </div>
                 <div>
                   {result.input}
                 </div>
-                <div class="font-medium mt-4">{$_('evaluation.results.output_label')}</div>
+                <div class="font-medium mt-4">
+                  {$_("evaluation.results.output_label")}
+                </div>
                 <div>
                   {result.output}
                 </div>
@@ -226,7 +241,7 @@
                               thinking_dialog?.show()
                             }}
                           >
-                            {$_('evaluation.results.see_all')}
+                            {$_("evaluation.results.see_all")}
                           </button>
                         </div>
                       </div>
@@ -252,16 +267,16 @@
 </AppPage>
 
 <Dialog
-  title={$_('evaluation.results.peek_dialog.title')}
+  title={$_("evaluation.results.peek_dialog.title")}
   bind:this={peek_dialog}
   blur_background={true}
   action_buttons={[
     {
-      label: $_('evaluation.results.peek_dialog.look_anyways'),
+      label: $_("evaluation.results.peek_dialog.look_anyways"),
       isError: true,
     },
     {
-      label: $_('evaluation.results.peek_dialog.go_back'),
+      label: $_("evaluation.results.peek_dialog.go_back"),
       isPrimary: true,
       action: () => {
         window.history.back()
@@ -271,24 +286,22 @@
   ]}
 >
   <div class="font-light flex flex-col gap-4">
-    <Warning
-      warning_message={$_('evaluation.results.peek_dialog.warning')}
-    />
+    <Warning warning_message={$_("evaluation.results.peek_dialog.warning")} />
     <div>
-      {$_('evaluation.results.peek_dialog.data_leakage_warning')}
+      {$_("evaluation.results.peek_dialog.data_leakage_warning")}
     </div>
     <div>
-      {$_('evaluation.results.peek_dialog.alternative_suggestion')}
+      {$_("evaluation.results.peek_dialog.alternative_suggestion")}
     </div>
   </div>
 </Dialog>
 
 <Dialog
   bind:this={thinking_dialog}
-  title={$_('evaluation.results.thinking_dialog.title')}
+  title={$_("evaluation.results.thinking_dialog.title")}
   action_buttons={[
     {
-      label: $_('common.close'),
+      label: $_("common.close"),
       isCancel: true,
     },
   ]}

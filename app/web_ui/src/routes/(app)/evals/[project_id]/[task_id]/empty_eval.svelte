@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   export let project_id: string
   export let task_id: string
@@ -49,25 +49,25 @@
       </svg>
     </div>
     <div class="font-medium text-lg">
-      {$_('evaluation.improve_quality')}
+      {$_("evaluation.improve_quality")}
     </div>
-    <div>{$_('evaluation.create_powerful_evaluators')}</div>
+    <div>{$_("evaluation.create_powerful_evaluators")}</div>
     <div>
-      {$_('evaluation.compare_approaches')}
+      {$_("evaluation.compare_approaches")}
     </div>
     <div>
-      {$_('evaluation.ensure_quality')}
+      {$_("evaluation.ensure_quality")}
     </div>
     <a
       href={`/evals/${project_id}/${task_id}/create_evaluator`}
-      class="btn btn-primary mt-2">{$_('evaluation.create_eval')}</a
+      class="btn btn-primary mt-2">{$_("evaluation.create_eval")}</a
     >
     <a
       href="https://docs.getkiln.ai/docs/evaluations"
       class="btn"
       target="_blank"
     >
-      {$_('evaluation.evals_guide')}
+      {$_("evaluation.evals_guide")}
     </a>
   </div>
 </div>

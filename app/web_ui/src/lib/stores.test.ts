@@ -15,11 +15,11 @@ import "./i18n"
 const testProject = {
   v: 1,
   id: "test-project-id",
-  name: "Test Project", 
+  name: "Test Project",
   path: "/test/path",
-  description: "Test Description", 
+  description: "Test Description",
   created_at: new Date().toISOString(),
-  created_by: "Test User", 
+  created_by: "Test User",
 }
 
 describe("stores", () => {
@@ -97,7 +97,7 @@ describe("stores", () => {
       available_models.set([
         {
           provider_id: "test-provider",
-          provider_name: "Test Provider", 
+          provider_name: "Test Provider",
           models: [],
         },
       ])

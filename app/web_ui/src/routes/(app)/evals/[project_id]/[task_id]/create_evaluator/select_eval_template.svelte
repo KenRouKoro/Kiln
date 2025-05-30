@@ -25,15 +25,25 @@
   const evaluator_template_descriptions: EvaluatorTemplateDescription[] = [
     {
       id: "kiln_requirements_preview",
-      name: $_("evaluation.create_evaluator.select_eval_template.overall_task_performance"),
-      description: $_("evaluation.create_evaluator.select_eval_template.overall_task_performance_description"),
+      name: $_(
+        "evaluation.create_evaluator.select_eval_template.overall_task_performance",
+      ),
+      description: $_(
+        "evaluation.create_evaluator.select_eval_template.overall_task_performance_description",
+      ),
       recommended: true,
     },
     {
       id: "none",
-      name: $_("evaluation.create_evaluator.select_eval_template.custom_goal_and_scores"),
-      highlight_title: $_("evaluation.create_evaluator.select_eval_template.create_your_own"),
-      description: $_("evaluation.create_evaluator.select_eval_template.custom_goal_description"),
+      name: $_(
+        "evaluation.create_evaluator.select_eval_template.custom_goal_and_scores",
+      ),
+      highlight_title: $_(
+        "evaluation.create_evaluator.select_eval_template.create_your_own",
+      ),
+      description: $_(
+        "evaluation.create_evaluator.select_eval_template.custom_goal_description",
+      ),
       eval_template: {
         template_id: "none",
         name: "",
@@ -50,29 +60,47 @@
     },
     {
       id: "toxicity",
-      name: $_("evaluation.create_evaluator.select_eval_template.toxicity_evaluator"),
-      description: $_("evaluation.create_evaluator.select_eval_template.toxicity_description"),
+      name: $_(
+        "evaluation.create_evaluator.select_eval_template.toxicity_evaluator",
+      ),
+      description: $_(
+        "evaluation.create_evaluator.select_eval_template.toxicity_description",
+      ),
       eval_template: {
         template_id: "toxicity",
-        name: $_("evaluation.create_evaluator.select_eval_template.toxicity_evaluator"),
-        description: $_("evaluation.create_evaluator.select_eval_template.toxicity_description"),
+        name: $_(
+          "evaluation.create_evaluator.select_eval_template.toxicity_evaluator",
+        ),
+        description: $_(
+          "evaluation.create_evaluator.select_eval_template.toxicity_description",
+        ),
         output_scores: [
           {
             name: "Toxicity",
             type: "pass_fail",
-            instruction: $_("evaluation.create_evaluator.select_eval_template.toxicity_description"),
+            instruction: $_(
+              "evaluation.create_evaluator.select_eval_template.toxicity_description",
+            ),
           },
         ],
       },
     },
     {
       id: "bias",
-      name: $_("evaluation.create_evaluator.select_eval_template.bias_evaluator"),
-      description: $_("evaluation.create_evaluator.select_eval_template.bias_description"),
+      name: $_(
+        "evaluation.create_evaluator.select_eval_template.bias_evaluator",
+      ),
+      description: $_(
+        "evaluation.create_evaluator.select_eval_template.bias_description",
+      ),
       eval_template: {
         template_id: "bias",
-        name: $_("evaluation.create_evaluator.select_eval_template.bias_evaluator"),
-        description: $_("evaluation.create_evaluator.select_eval_template.bias_description"),
+        name: $_(
+          "evaluation.create_evaluator.select_eval_template.bias_evaluator",
+        ),
+        description: $_(
+          "evaluation.create_evaluator.select_eval_template.bias_description",
+        ),
         output_scores: [
           {
             name: "Bias",
@@ -84,12 +112,20 @@
     },
     {
       id: "maliciousness",
-      name: $_("evaluation.create_evaluator.select_eval_template.maliciousness_evaluator"),
-      description: $_("evaluation.create_evaluator.select_eval_template.maliciousness_description"),
+      name: $_(
+        "evaluation.create_evaluator.select_eval_template.maliciousness_evaluator",
+      ),
+      description: $_(
+        "evaluation.create_evaluator.select_eval_template.maliciousness_description",
+      ),
       eval_template: {
         template_id: "maliciousness",
-        name: $_("evaluation.create_evaluator.select_eval_template.maliciousness_evaluator"),
-        description: $_("evaluation.create_evaluator.select_eval_template.maliciousness_description"),
+        name: $_(
+          "evaluation.create_evaluator.select_eval_template.maliciousness_evaluator",
+        ),
+        description: $_(
+          "evaluation.create_evaluator.select_eval_template.maliciousness_description",
+        ),
         output_scores: [
           {
             name: "Maliciousness",
@@ -101,12 +137,20 @@
     },
     {
       id: "factual_correctness",
-      name: $_("evaluation.create_evaluator.select_eval_template.factual_correctness_evaluator"),
-      description: $_("evaluation.create_evaluator.select_eval_template.factual_correctness_description"),
+      name: $_(
+        "evaluation.create_evaluator.select_eval_template.factual_correctness_evaluator",
+      ),
+      description: $_(
+        "evaluation.create_evaluator.select_eval_template.factual_correctness_description",
+      ),
       eval_template: {
         template_id: "factual_correctness",
-        name: $_("evaluation.create_evaluator.select_eval_template.factual_correctness_evaluator"),
-        description: $_("evaluation.create_evaluator.select_eval_template.factual_correctness_description"),
+        name: $_(
+          "evaluation.create_evaluator.select_eval_template.factual_correctness_evaluator",
+        ),
+        description: $_(
+          "evaluation.create_evaluator.select_eval_template.factual_correctness_description",
+        ),
         output_scores: [
           {
             name: "Factual Correctness",
@@ -118,12 +162,20 @@
     },
     {
       id: "jailbreak",
-      name: $_("evaluation.create_evaluator.select_eval_template.jailbreak_evaluator"),
-      description: $_("evaluation.create_evaluator.select_eval_template.jailbreak_description"),
+      name: $_(
+        "evaluation.create_evaluator.select_eval_template.jailbreak_evaluator",
+      ),
+      description: $_(
+        "evaluation.create_evaluator.select_eval_template.jailbreak_description",
+      ),
       eval_template: {
         template_id: "jailbreak",
-        name: $_("evaluation.create_evaluator.select_eval_template.jailbreak_evaluator"),
-        description: $_("evaluation.create_evaluator.select_eval_template.jailbreak_description"),
+        name: $_(
+          "evaluation.create_evaluator.select_eval_template.jailbreak_evaluator",
+        ),
+        description: $_(
+          "evaluation.create_evaluator.select_eval_template.jailbreak_description",
+        ),
         output_scores: [
           {
             name: "Jailbreak Score",
@@ -159,7 +211,11 @@
 
     if (template_id === "kiln_requirements") {
       if (!task) {
-        alert($_("evaluation.create_evaluator.select_eval_template.task_required_error"))
+        alert(
+          $_(
+            "evaluation.create_evaluator.select_eval_template.task_required_error",
+          ),
+        )
         return
       }
 
@@ -169,7 +225,9 @@
         instruction: requirement.instruction,
       }))
       output_scores.push({
-        name: $_("evaluation.create_evaluator.select_eval_template.overall_rating"),
+        name: $_(
+          "evaluation.create_evaluator.select_eval_template.overall_rating",
+        ),
         type: "five_star",
         instruction: "Evaluate the overall quality of the output.",
       })
@@ -243,10 +301,14 @@
 
 <Dialog
   bind:this={overall_task_performance_dialog}
-  title={$_("evaluation.create_evaluator.select_eval_template.overall_performance_eval")}
+  title={$_(
+    "evaluation.create_evaluator.select_eval_template.overall_performance_eval",
+  )}
   action_buttons={[
     {
-      label: $_("evaluation.create_evaluator.select_eval_template.edit_requirements"),
+      label: $_(
+        "evaluation.create_evaluator.select_eval_template.edit_requirements",
+      ),
       action: edit_requirements,
     },
     {
@@ -260,10 +322,15 @@
   ]}
 >
   <div class="font-light text-sm">
-    <div>{$_("evaluation.create_evaluator.select_eval_template.eval_goals_description")}</div>
+    <div>
+      {$_(
+        "evaluation.create_evaluator.select_eval_template.eval_goals_description",
+      )}
+    </div>
     <ul class="list-disc list-inside mt-2">
       <li>
-        {$_("evaluation.create_evaluator.select_eval_template.overall_rating")} - {rating_name("five_star")}
+        {$_("evaluation.create_evaluator.select_eval_template.overall_rating")} -
+        {rating_name("five_star")}
       </li>
       {#each $current_task?.requirements || [] as requirement}
         <li>
@@ -286,7 +353,9 @@
         ></path>
       </svg>
       <span class="text-sm">
-        {$_("evaluation.create_evaluator.select_eval_template.edit_requirements_note")}
+        {$_(
+          "evaluation.create_evaluator.select_eval_template.edit_requirements_note",
+        )}
       </span>
     </div>
     <div class="mt-2"></div>

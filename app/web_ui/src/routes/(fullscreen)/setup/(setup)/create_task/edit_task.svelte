@@ -83,7 +83,10 @@
       }
       const project_id = target_project_id
       if (!project_id) {
-        throw new KilnError($_("task.edit_task_page.current_project_not_found"), null)
+        throw new KilnError(
+          $_("task.edit_task_page.current_project_not_found"),
+          null,
+        )
       }
       let data: Task | undefined
       let network_error: unknown | null = null
@@ -160,9 +163,7 @@
 
   function example_task() {
     if (has_edits()) {
-      if (
-        !confirm($_("task.edit_task_page.replace_edits_confirm"))
-      ) {
+      if (!confirm($_("task.edit_task_page.replace_edits_confirm"))) {
         return
       }
     }
@@ -179,12 +180,16 @@
           joke_topic: {
             title: $_("task.edit_task_page.example_joke_topic_title"),
             type: "string",
-            description: $_("task.edit_task_page.example_joke_topic_description"),
+            description: $_(
+              "task.edit_task_page.example_joke_topic_description",
+            ),
           },
           joke_style: {
             title: $_("task.edit_task_page.example_joke_style_title"),
             type: "string",
-            description: $_("task.edit_task_page.example_joke_style_description"),
+            description: $_(
+              "task.edit_task_page.example_joke_style_description",
+            ),
           },
         },
         required: ["joke_topic"],
@@ -200,7 +205,9 @@
           punchline: {
             title: $_("task.edit_task_page.example_punchline_title"),
             type: "string",
-            description: $_("task.edit_task_page.example_punchline_description"),
+            description: $_(
+              "task.edit_task_page.example_punchline_description",
+            ),
           },
         },
         required: ["setup", "punchline"],
@@ -213,7 +220,9 @@
       return $_("task.edit_task_page.prompt_description_creating")
     }
     if (task.requirements.length > 0) {
-      return $_("task.edit_task_page.prompt_description_editing_with_requirements")
+      return $_(
+        "task.edit_task_page.prompt_description_editing_with_requirements",
+      )
     }
     return $_("task.edit_task_page.prompt_description_editing_no_requirements")
   }
@@ -221,7 +230,9 @@
 
 <div class="flex flex-col gap-2 w-full">
   <FormContainer
-    submit_label={editing ? $_("task.edit_task_page.save_task") : $_("task.edit_task_page.create_task")}
+    submit_label={editing
+      ? $_("task.edit_task_page.save_task")
+      : $_("task.edit_task_page.create_task")}
     on:submit={create_task}
     bind:warn_before_unload
     bind:error
@@ -229,7 +240,9 @@
     bind:saved
   >
     <div>
-      <div class="text-xl font-bold">{$_("task.edit_task_page.part_1_overview")}</div>
+      <div class="text-xl font-bold">
+        {$_("task.edit_task_page.part_1_overview")}
+      </div>
       {#if creating && !hide_example_task}
         <h3 class="text-sm mt-1">
           {$_("task.edit_task_page.just_exploring")}
@@ -307,7 +320,9 @@
             <div class="grow flex flex-col gap-1">
               <FormElement
                 label={$_("task.edit_task_page.requirement_name_label")}
-                info_description={$_("task.edit_task_page.requirement_name_info")}
+                info_description={$_(
+                  "task.edit_task_page.requirement_name_info",
+                )}
                 id="requirement_name_{item_index}"
                 light_label={true}
                 bind:value={task.requirements[item_index].name}
@@ -321,9 +336,18 @@
                 id="requirement_type_{item_index}"
                 light_label={true}
                 select_options={[
-                  ["five_star", $_("task.edit_task_page.rating_types.five_star")],
-                  ["pass_fail", $_("task.edit_task_page.rating_types.pass_fail")],
-                  ["pass_fail_critical", $_("task.edit_task_page.rating_types.pass_fail_critical")],
+                  [
+                    "five_star",
+                    $_("task.edit_task_page.rating_types.five_star"),
+                  ],
+                  [
+                    "pass_fail",
+                    $_("task.edit_task_page.rating_types.pass_fail"),
+                  ],
+                  [
+                    "pass_fail_critical",
+                    $_("task.edit_task_page.rating_types.pass_fail_critical"),
+                  ],
                 ]}
                 bind:value={task.requirements[item_index].type}
               />
@@ -347,7 +371,9 @@
           <div class="grow flex flex-col gap-1">
             <FormElement
               label={$_("task.edit_task_page.requirement_instructions_label")}
-              info_description={$_("task.edit_task_page.requirement_instructions_info")}
+              info_description={$_(
+                "task.edit_task_page.requirement_instructions_info",
+              )}
               inputType="textarea"
               id="requirement_instructions_{item_index}"
               light_label={true}
@@ -360,7 +386,10 @@
 
     <div class="text-sm font-medium text-left pt-6 flex flex-col gap-1">
       <div class="text-xl font-bold">
-        {$_("task.edit_task_page.part")} {show_requirements ? "3" : "2"}: {$_("task.edit_task_page.input_schema_title")}
+        {$_("task.edit_task_page.part")}
+        {show_requirements ? "3" : "2"}: {$_(
+          "task.edit_task_page.input_schema_title",
+        )}
       </div>
       <div class="text-xs text-gray-500">
         {$_("task.edit_task_page.input_schema_description")}
@@ -372,7 +401,13 @@
         <div>
           <div class="text-sm mb-2 flex flex-col gap-1">
             <p>
-              {$_("task.edit_task_page.cannot_edit_existing_schema", { values: { type: $_("task.edit_task_page.input_schema_title").toLowerCase() } })}
+              {$_("task.edit_task_page.cannot_edit_existing_schema", {
+                values: {
+                  type: $_(
+                    "task.edit_task_page.input_schema_title",
+                  ).toLowerCase(),
+                },
+              })}
             </p>
             <p>
               {$_("task.edit_task_page.clone_task_instead")}
@@ -385,7 +420,8 @@
             </p>
           </div>
           <Output
-            raw_output={task.input_json_schema || $_("task.edit_task_page.input_format_plain_text")}
+            raw_output={task.input_json_schema ||
+              $_("task.edit_task_page.input_format_plain_text")}
           />
         </div>
       {:else}
@@ -398,7 +434,10 @@
 
     <div class="text-sm font-medium text-left pt-6 flex flex-col gap-1">
       <div class="text-xl font-bold">
-        {$_("task.edit_task_page.part")} {show_requirements ? "4" : "3"}: {$_("task.edit_task_page.output_schema_title")}
+        {$_("task.edit_task_page.part")}
+        {show_requirements ? "4" : "3"}: {$_(
+          "task.edit_task_page.output_schema_title",
+        )}
       </div>
       <div class="text-xs text-gray-500">
         {$_("task.edit_task_page.output_schema_description")}
@@ -410,7 +449,13 @@
         <div>
           <div class="text-sm mb-2 flex flex-col gap-1">
             <p>
-              {$_("task.edit_task_page.cannot_edit_existing_schema", { values: { type: $_("task.edit_task_page.output_schema_title").toLowerCase() } })}
+              {$_("task.edit_task_page.cannot_edit_existing_schema", {
+                values: {
+                  type: $_(
+                    "task.edit_task_page.output_schema_title",
+                  ).toLowerCase(),
+                },
+              })}
             </p>
             <p>
               {$_("task.edit_task_page.clone_task_instead")}
@@ -423,7 +468,8 @@
             </p>
           </div>
           <Output
-            raw_output={task.output_json_schema || $_("task.edit_task_page.output_format_plain_text")}
+            raw_output={task.output_json_schema ||
+              $_("task.edit_task_page.output_format_plain_text")}
           />
         </div>
       {:else}

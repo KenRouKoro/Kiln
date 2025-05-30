@@ -86,7 +86,9 @@ describe("update utilities", () => {
         expect(result).toHaveProperty("message")
         expect(result).toHaveProperty("name")
         // The error message should be the translated version
-        expect(result.message).toMatch(/Failed to fetch update data|获取更新数据失败/)
+        expect(result.message).toMatch(
+          /Failed to fetch update data|获取更新数据失败/,
+        )
       }
     })
   })

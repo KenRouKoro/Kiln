@@ -5,7 +5,7 @@
     typed_json_from_schema_model,
     type SchemaModelProperty,
   } from "$lib/utils/json_schema_editor/json_schema_templates"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   let id = "plaintext_input_" + Math.random().toString(36).substring(2, 15)
 
@@ -45,25 +45,25 @@
   export function describe_type(property: SchemaModelProperty): string {
     let base_description = ""
     if (property.type === "string") {
-      base_description = $_('run.type_descriptions.string')
+      base_description = $_("run.type_descriptions.string")
     } else if (property.type === "number") {
-      base_description = $_('run.type_descriptions.number')
+      base_description = $_("run.type_descriptions.number")
     } else if (property.type === "integer") {
-      base_description = $_('run.type_descriptions.integer')
+      base_description = $_("run.type_descriptions.integer")
     } else if (property.type === "boolean") {
-      base_description = $_('run.type_descriptions.boolean')
+      base_description = $_("run.type_descriptions.boolean")
     } else if (property.type === "array") {
-      base_description = $_('run.type_descriptions.array')
+      base_description = $_("run.type_descriptions.array")
     } else if (property.type === "object") {
-      base_description = $_('run.type_descriptions.object')
+      base_description = $_("run.type_descriptions.object")
     } else {
-      base_description = $_('run.type_descriptions.unknown')
+      base_description = $_("run.type_descriptions.unknown")
     }
 
     if (property.required) {
-      return base_description + $_('run.type_descriptions.required_suffix')
+      return base_description + $_("run.type_descriptions.required_suffix")
     }
-    return base_description + $_('run.type_descriptions.optional_suffix')
+    return base_description + $_("run.type_descriptions.optional_suffix")
   }
 
   function get_input_type(property: SchemaModelProperty): "textarea" | "input" {
@@ -78,10 +78,10 @@
     property: SchemaModelProperty,
   ): string | undefined {
     if (property.type === "array") {
-      return $_('run.input_info.array_description')
+      return $_("run.input_info.array_description")
     }
     if (property.type === "object") {
-      return $_('run.input_info.object_description')
+      return $_("run.input_info.object_description")
     }
     return undefined
   }
@@ -89,7 +89,7 @@
 
 {#if !input_schema}
   <FormElement
-    label={$_('run.plaintext_input')}
+    label={$_("run.plaintext_input")}
     inputType="textarea"
     {id}
     bind:value={plaintext_input}
@@ -108,5 +108,5 @@
     />
   {/each}
 {:else}
-  <p>{$_('run.invalid_unsupported_schema')}</p>
+  <p>{$_("run.invalid_unsupported_schema")}</p>
 {/if}

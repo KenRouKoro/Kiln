@@ -138,9 +138,12 @@
     <div
       class="w-full min-h-[50vh] flex flex-col justify-center items-center gap-2"
     >
-      <div class="font-medium">{$_("finetune.details.error_loading_finetunes")}</div>
+      <div class="font-medium">
+        {$_("finetune.details.error_loading_finetunes")}
+      </div>
       <div class="text-error text-sm">
-        {finetunes_error.getMessage() || $_("finetune.details.unknown_error_occurred")}
+        {finetunes_error.getMessage() ||
+          $_("finetune.details.unknown_error_occurred")}
       </div>
     </div>
   {/if}

@@ -1,6 +1,6 @@
 <script lang="ts">
   import { page } from "$app/stores"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 
   export let generate_subtopics: () => void
   export let generate_samples: () => void
@@ -36,56 +36,59 @@
     </div>
 
     {#if let_me_in || reason}
-      <div class="font-medium text-lg">{$_('data_generation.intro.synthetic_data_tips')}</div>
+      <div class="font-medium text-lg">
+        {$_("data_generation.intro.synthetic_data_tips")}
+      </div>
       <div>
-        1. {$_('data_generation.intro.tip_1')} <a
+        1. {$_("data_generation.intro.tip_1")}
+        <a
           href="https://docs.getkiln.ai/docs/synthetic-data-generation#topic-tree-data-generation"
           target="_blank"
-          class="link">{$_('data_generation.intro.guide')}</a
+          class="link">{$_("data_generation.intro.guide")}</a
         >.
       </div>
       <div>
-        2. {$_('data_generation.intro.tip_2')}
+        2. {$_("data_generation.intro.tip_2")}
         <a
           href="https://docs.getkiln.ai/docs/synthetic-data-generation#human-guidance"
           target="_blank"
-          class="link">{$_('data_generation.intro.guide')}</a
+          class="link">{$_("data_generation.intro.guide")}</a
         >.
       </div>
       <button class="btn btn-primary" on:click={() => generate_subtopics()}>
-        {$_('data_generation.add_top_level_topics')}
+        {$_("data_generation.add_top_level_topics")}
       </button>
       <button class="btn" on:click={() => generate_samples()}>
-        {$_('data_generation.add_top_level_data')}
+        {$_("data_generation.add_top_level_data")}
       </button>
       <a
         href="https://docs.getkiln.ai/docs/synthetic-data-generation"
         target="_blank"
         class="btn"
       >
-        {$_('data_generation.intro.read_the_docs')}
+        {$_("data_generation.intro.read_the_docs")}
       </a>
     {:else}
       <div class="font-medium text-lg">
-        {$_('data_generation.intro.generate_title')}
+        {$_("data_generation.intro.generate_title")}
       </div>
       <div>
-        {$_('data_generation.intro.generate_description')}
+        {$_("data_generation.intro.generate_description")}
       </div>
       <a
         class="btn btn-primary"
         href={`/evals/${project_id}/${task_id}/create_evaluator`}
       >
-        {$_('data_generation.intro.create_eval')}
+        {$_("data_generation.intro.create_eval")}
       </a>
       <a
         class="btn btn-primary"
         href={`/fine_tune/${project_id}/${task_id}/create_finetune`}
       >
-        {$_('data_generation.intro.create_finetune')}
+        {$_("data_generation.intro.create_finetune")}
       </a>
       <button class="btn" on:click={() => (let_me_in = true)}
-        >{$_('data_generation.intro.proceed_to_generator')}</button
+        >{$_("data_generation.intro.proceed_to_generator")}</button
       >
     {/if}
   </div>

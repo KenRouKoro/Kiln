@@ -1,6 +1,6 @@
 <script lang="ts">
   import SelectTasksMenu from "../../../../(app)/select_tasks_menu.svelte"
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
 </script>
 
 <div class="grow"></div>
@@ -8,10 +8,10 @@
   <img src="/logo.svg" alt="logo" class="size-8 mb-3" />
 </div>
 <h1 class="text-2xl lg:text-4xl flex-none font-bold text-center">
-  {$_('setup.select_project_and_task')}
+  {$_("setup.select_project_and_task")}
 </h1>
 <h3 class="text-base font-medium text-center mt-3 max-w-[600px] mx-auto">
-  {$_('setup.select_project_and_task_subtitle')}
+  {$_("setup.select_project_and_task_subtitle")}
 </h3>
 
 <div

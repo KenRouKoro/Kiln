@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n'
-  
+  import { _ } from "svelte-i18n"
+
   export let content: unknown[] = []
   export let content_label: string = "Item"
   export let start_with_one: boolean = true
@@ -29,9 +29,9 @@
     if (
       isItemUnedited ||
       confirm(
-        $_('forms.form_list.remove_item_confirm', {
-          values: { content_label, index: index + 1 }
-        })
+        $_("forms.form_list.remove_item_confirm", {
+          values: { content_label, index: index + 1 },
+        }),
       )
     ) {
       content.splice(index, 1)
@@ -83,7 +83,7 @@
             class="link text-xs text-gray-500 {frozen ? 'hidden' : ''}"
             on:click={() => remove_item(item_index)}
           >
-            {$_('forms.form_list.remove')}
+            {$_("forms.form_list.remove")}
           </button>
         </div>
         <slot {item} {item_index} />
@@ -98,6 +98,6 @@
     on:click={() => add_item(true)}
     id={id + "_add_button"}
   >
-    {$_('forms.form_list.add', { values: { content_label } })}
+    {$_("forms.form_list.add", { values: { content_label } })}
   </button>
 </div>

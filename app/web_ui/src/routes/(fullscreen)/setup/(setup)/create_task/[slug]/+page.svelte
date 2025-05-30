@@ -1,5 +1,5 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n'
+  import { _ } from "svelte-i18n"
   import { page } from "$app/stores"
   import EditTask from "../edit_task.svelte"
 
@@ -11,10 +11,10 @@
   <img src="/logo.svg" alt="logo" class="size-8 mb-3" />
 </div>
 <h1 class="text-2xl lg:text-4xl flex-none font-bold text-center">
-  {$_('task.create_task_page.title')}
+  {$_("task.create_task_page.title")}
 </h1>
 <h3 class="text-base font-medium text-center mt-3 max-w-[600px] mx-auto">
-  {$_('task.create_task_page.subtitle')}
+  {$_("task.create_task_page.subtitle")}
 </h3>
 
 <div
