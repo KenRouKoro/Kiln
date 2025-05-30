@@ -1,6 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n'
-  
+
   export let project_id: string
   export let task_id: string
 </script>
@@ -60,7 +60,7 @@
     </div>
     <a
       href={`/evals/${project_id}/${task_id}/create_evaluator`}
-      class="btn btn-primary">{$_('evaluation.create_eval')}</a
+      class="btn btn-primary mt-2">{$_('evaluation.create_eval')}</a
     >
     <a
       href="https://docs.getkiln.ai/docs/evaluations"
