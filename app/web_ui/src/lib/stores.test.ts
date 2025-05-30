@@ -8,15 +8,18 @@ import {
   provider_name_from_id,
 } from "./stores"
 import { describe, it, expect, beforeEach } from "vitest"
+import { _, init } from "svelte-i18n"
+
+import "./i18n"
 
 const testProject = {
   v: 1,
   id: "test-project-id",
-  name: "Test Project",
+  name: "Test Project", 
   path: "/test/path",
-  description: "Test Description",
+  description: "Test Description", 
   created_at: new Date().toISOString(),
-  created_by: "Test User",
+  created_by: "Test User", 
 }
 
 describe("stores", () => {
@@ -85,15 +88,16 @@ describe("stores", () => {
   })
 
   describe("provider_name_from_id", () => {
-    it("should return 'Unknown' when provider_id is empty", () => {
-      expect(provider_name_from_id("")).toBe("Unknown")
+    it("should return translated 'Unknown' when provider_id is empty", () => {
+      const result = provider_name_from_id("")
+      expect(result).toMatch(/Unknown|未知/)
     })
 
     it("should return provider_name when provider exists", () => {
       available_models.set([
         {
           provider_id: "test-provider",
-          provider_name: "Test Provider",
+          provider_name: "Test Provider", 
           models: [],
         },
       ])
